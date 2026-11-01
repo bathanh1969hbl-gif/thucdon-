@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cửa Hàng Bách Xanh - Bò Tươi & Bò Né Quận 12 | Hệ Sinh Thái Đặt Món & Quản Trị</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Be Vietnam Pro & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: {
+              DEFAULT: '#8B1E1E',
+              dark: '#631212',
+              light: '#A82929',
+              soft: '#FDF2F2'
+            },
+            gold: {
+              DEFAULT: '#D4AF37',
+              light: '#F3E5AB',
+              dark: '#AA820A'
+            },
+            cream: {
+              DEFAULT: '#FFFDF9',
+              warm: '#F9F4EA',
+              card: '#FFFFFF'
+            },
+            charcoal: {
+              DEFAULT: '#1F1A17',
+              muted: '#5A504B'
+            }
+          },
+          fontFamily: {
+            sans: ['"Be Vietnam Pro"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif']
+          },
+          boxShadow: {
+            'warm': '0 12px 32px -8px rgba(139, 30, 30, 0.14)',
+            'gold': '0 8px 25px -4px rgba(212, 175, 55, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FFFDF9;
+      color: #1F1A17;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      overflow-x: hidden;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, rgba(31, 26, 23, 0.92) 0%, rgba(139, 30, 30, 0.88) 60%, rgba(99, 18, 18, 0.94) 100%);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(90deg, #F3E5AB 0%, #D4AF37 50%, #FFF3B0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+      color: #1F1A17;
+    }
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #E5C158 0%, #C9971A 100%);
+    }
+    .burgundy-btn {
+      background: linear-gradient(135deg, #8B1E1E 0%, #631212 100%);
+      color: #FFFDF9;
+    }
+    .burgundy-btn:hover {
+      background: linear-gradient(135deg, #A82929 0%, #7A1818 100%);
+    }
+    /* Custom Range Slider */
+    input[type="range"] {
+      accent-color: #8B1E1E;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F9F4EA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #8B1E1E;
+      border-radius: 9999px;
+    }
+    @keyframes pulse-Subtle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .animate-sizzle {
+      animation: pulse-Subtle 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-burgundy selection:text-white">
+
+  <!-- TOP CONFIGURATION & BRAND SWITCHER BAR (CHO CHỦ QUÁN) -->
+  <div class="bg-charcoal text-cream border-b border-gold/30 text-xs sm:text-sm py-2 px-3 sm:px-6">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-gold text-charcoal">
+          <i class="fa-solid fa-sliders mr-1.5"></i>CHẾ ĐỘ THƯƠNG HIỆU
+        </span>
+        <span class="text-cream/80 hidden md:inline">Chuyển đổi nhanh 1 chạm:</span>
+        <div class="inline-flex rounded-lg bg-white/10 p-0.5 border border-white/15">
+          <button id="btnBrandBachXanh" onclick="switchBrandPreset('bachxanh')" class="px-2.5 py-1 rounded-md text-xs font-semibold transition-all bg-burgundy text-white shadow">
+            Cửa Hàng Bách Xanh (Bò Lẻ & Bò Né)
+          </button>
+          <button id="btnBrandBaThanh" onclick="switchBrandPreset('bathanh')" class="px-2.5 py-1 rounded-md text-xs font-semibold transition-all text-cream/80 hover:text-white">
+            Quán Ăn 396 - Bò Né Bá Thành
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="toggleQuickConfigModal()" class="inline-flex items-center gap-1.5 text-gold hover:underline font-medium">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>Đổi SĐT Zalo / Địa chỉ (<span id="topBarPhoneDisplay">0392755766</span>)</span>
+        </button>
+        <a href="#phan-tich-chien-luoc" class="hidden sm:inline-flex items-center gap-1 bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded-md text-xs text-cream transition">
+          <i class="fa-solid fa-chart-line text-gold"></i> Bản Phân Tích Chủ Quán
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-gold/30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-burgundy flex items-center justify-center text-gold shadow-md border border-gold/40 group-hover:scale-105 transition">
+          <i class="fa-solid fa-fire-flame-curved text-xl sm:text-2xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="navBrandName" class="font-display font-bold text-lg sm:text-xl text-burgundy tracking-tight leading-none">
+              Cửa Hàng Bách Xanh
+            </span>
+            <span class="hidden sm:inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-gold/20 text-burgundy border border-gold/40">
+              Quận 12
+            </span>
+          </div>
+          <p id="navBrandTagline" class="text-xs text-charcoal-muted font-medium mt-0.5">
+            Đặc Sản Bò Tươi Ướp Sẵn & Bò Né Nóng Hổi
+          </p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-charcoal">
+        <a href="#thuc-don" class="hover:text-burgundy transition flex items-center gap-1.5">
+          <i class="fa-solid fa-utensils text-burgundy"></i> Thực Đơn & Bò Lẻ
+        </a>
+        <a href="#dat-ban" class="hover:text-burgundy transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-check text-burgundy"></i> Đặt Bàn Giờ Cao Điểm
+        </a>
+        <a href="#bang-tinh-kinh-doanh" class="hover:text-burgundy transition flex items-center gap-1.5">
+          <i class="fa-solid fa-calculator text-burgundy"></i> Bảng Tính 100 - 1.000 Suất
+        </a>
+        <a href="#phan-tich-chien-luoc" class="hover:text-burgundy transition flex items-center gap-1.5">
+          <i class="fa-solid fa-compass-drafting text-burgundy"></i> Chiến Lược & Bếp
+        </a>
+        <a href="#sieu-cau-lenh" class="hover:text-burgundy transition flex items-center gap-1.5">
+          <i class="fa-solid fa-code text-burgundy"></i> Siêu Câu Lệnh RISEN
+        </a>
+      </nav>
+
+      <!-- Action Buttons (Hotline + Cart + Mobile Menu) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a id="navCallBtn" href="tel:0392755766" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-burgundy/20 bg-burgundy-soft text-burgundy font-bold text-xs sm:text-sm hover:bg-burgundy hover:text-white transition">
+          <i class="fa-solid fa-phone-volume animate-bounce"></i>
+          <span id="navPhoneText">0392755766</span>
+        </a>
+
+        <button onclick="toggleCartDrawer(true)" class="relative inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl burgundy-btn font-bold text-xs sm:text-sm shadow-warm transition">
+          <i class="fa-solid fa-cart-shopping text-gold"></i>
+          <span>Giỏ Hàng</span>
+          <span id="headerCartCount" class="inline-flex items-center justify-center px-2 py-0.5 text-xs font-extrabold rounded-full bg-gold text-charcoal">
+            0
+          </span>
+        </button>
+
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl border border-charcoal/15 text-charcoal hover:bg-cream-warm" aria-label="Mở menu">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-cream border-t border-gold/20 px-4 pt-3 pb-4 space-y-2 shadow-lg">
+      <div class="grid grid-cols-2 gap-2 pb-2 border-b border-charcoal/10">
+        <a href="#thuc-don" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-cream-warm font-semibold text-sm flex items-center gap-2">
+          <i class="fa-solid fa-utensils text-burgundy"></i> Thực Đơn & Giỏ Hàng
+        </a>
+        <a href="#dat-ban" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-cream-warm font-semibold text-sm flex items-center gap-2">
+          <i class="fa-solid fa-chair text-burgundy"></i> Đặt Bàn Trước
+        </a>
+        <a href="#bang-tinh-kinh-doanh" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-cream-warm font-semibold text-sm flex items-center gap-2">
+          <i class="fa-solid fa-calculator text-burgundy"></i> Tính 100-1.000 Suất
+        </a>
+        <a href="#phan-tich-chien-luoc" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-cream-warm font-semibold text-sm flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-burgundy"></i> Giải Pháp Chủ Quán
+        </a>
+      </div>
+      <div class="flex items-center justify-between pt-1">
+        <a href="#sieu-cau-lenh" onclick="toggleMobileMenu()" class="text-xs font-bold text-burgundy underline">
+          Xem Siêu Câu Lệnh RISEN & Hướng dẫn GitHub
+        </a>
+        <a id="mobileCallLink" href="tel:0392755766" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-burgundy text-white text-xs font-bold">
+          <i class="fa-solid fa-phone"></i> Gọi Ngay
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: HERO SECTION (MÀN HÌNH ĐẦU TIÊN) -->
+  <section class="relative hero-gradient text-cream overflow-hidden py-10 sm:py-16 lg:py-20 border-b-4 border-gold">
+    <!-- Decorative subtle background pattern -->
+    <div class="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <!-- Left Hero Content (7 cols) -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- Trust Badges -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold/20 border border-gold text-gold-light text-xs sm:text-sm font-bold">
+              <i class="fa-solid fa-award text-gold"></i>
+              Phục vụ hơn 200+ thực khách mỗi ngày tại Quận 12
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 text-cream/90 text-xs font-semibold">
+              <i class="fa-regular fa-clock text-gold"></i> Mở cửa: 06:00 – 21:00
+            </span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-[52px] leading-tight tracking-tight">
+            Bò Tươi Mỗi Sáng <br class="hidden sm:inline" />
+            <span class="gold-gradient-text">Nóng Hổi Từng Chảo</span> <br />
+            Giao Nhanh Quận 12
+          </h1>
+
+          <!-- Brand Specific Description -->
+          <p id="heroDescription" class="text-cream/90 text-base sm:text-lg leading-relaxed max-w-2xl">
+            Chào mừng quý khách đến với <strong id="heroBrandInline" class="text-gold">Cửa hàng Bách Xanh - Đặc Sản Bò Quận 12</strong>. Chuyên phục vụ các suất Bò Né chảo gang xèo xèo nóng hổi, Bò Bít Tết sốt tiêu đen đậm đà và các khay <strong>Bò Tươi Ướp Sẵn chuẩn vị</strong> tiện lợi cho gia đình tự chế biến tại nhà chỉ trong 3 phút.
+          </p>
+
+          <!-- Location & Contact Pill -->
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-start sm:items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-gold/20 border border-gold/50 flex items-center justify-center text-gold shrink-0">
+                <i class="fa-solid fa-location-dot text-lg"></i>
+              </div>
+              <div>
+                <div class="text-xs uppercase tracking-wider text-gold-light font-semibold">Địa chỉ phục vụ & giao nhanh 5km:</div>
+                <div id="heroAddressText" class="text-sm sm:text-base font-bold text-white">
+                  [ĐỊA CHỈ CHI TIẾT QUẬN 12] - Quận 12, TP. Hồ Chí Minh
+                </div>
+              </div>
+            </div>
+            <button onclick="toggleQuickConfigModal()" class="self-start sm:self-center text-xs px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 text-gold-light font-semibold shrink-0 transition">
+              <i class="fa-solid fa-pen mr-1"></i> Sửa địa chỉ
+            </button>
+          </div>
+
+          <!-- Primary CTA Buttons -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+            <a href="#thuc-don" class="gold-btn font-extrabold text-base sm:text-lg px-7 py-4 rounded-2xl shadow-gold flex items-center justify-center gap-3 transition transform hover:-translate-y-0.5">
+              <i class="fa-solid fa-utensils text-lg"></i>
+              <span>ĐẶT MÓN & BÒ LẺ GIAO NGAY</span>
+            </a>
+            <a href="#dat-ban" class="bg-white/10 hover:bg-white/20 text-white border-2 border-gold/60 font-bold text-base sm:text-lg px-6 py-4 rounded-2xl flex items-center justify-center gap-2.5 transition">
+              <i class="fa-solid fa-calendar-check text-gold"></i>
+              <span>ĐẶT BÀN GIỮ CHỖ</span>
+            </a>
+          </div>
+
+          <!-- 4 Golden Commitments Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3">
+            <div class="p-3 rounded-xl bg-black/30 border border-white/10">
+              <div class="text-gold font-extrabold text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-bolt"></i> 3 Phút Lên Món
+              </div>
+              <p class="text-xs text-cream/75 mt-1">3 giây chào hỏi, 90s ra chảo nóng hổi</p>
+            </div>
+            <div class="p-3 rounded-xl bg-black/30 border border-white/10">
+              <div class="text-gold font-extrabold text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-scale-balanced"></i> Chuẩn 120g/Suất
+              </div>
+              <p class="text-xs text-cream/75 mt-1">100% bò tươi cân chuẩn định lượng</p>
+            </div>
+            <div class="p-3 rounded-xl bg-black/30 border border-white/10">
+              <div class="text-gold font-extrabold text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-qrcode"></i> Quét QR Tại Bàn
+              </div>
+              <p class="text-xs text-cream/75 mt-1">Không chờ đợi, không mất phí trung gian</p>
+            </div>
+            <div class="p-3 rounded-xl bg-black/30 border border-white/10">
+              <div class="text-gold font-extrabold text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-gift"></i> Tặng Trứng Ốp La
+              </div>
+              <p class="text-xs text-cream/75 mt-1">Ưu đãi khách quen kết nối Zalo quán</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Showcase with Explicit Placeholder Badges (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <!-- Main Dish Image Frame -->
+          <div class="relative rounded-3xl overflow-hidden border-2 border-gold shadow-2xl bg-charcoal group">
+            <img
+              id="heroDishImage"
+              src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80"
+              onerror="this.src='https://placehold.co/800x520/8B1E1E/FFFDF9?text=ANH+MON+BO+NE+VA+BO+TUOI'"
+              alt="Chảo Bò Né & Bò Tươi Quận 12"
+              class="w-full h-64 sm:h-72 object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div class="absolute top-3 left-3 bg-charcoal/85 backdrop-blur-md text-gold text-xs font-bold px-3 py-1.5 rounded-lg border border-gold/40">
+              <i class="fa-solid fa-camera mr-1"></i> [ẢNH MÓN BÒ]
+            </div>
+            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 flex items-end justify-between">
+              <div>
+                <span class="text-xs uppercase tracking-wider text-gold font-bold">Món Bán Chạy Nhất</span>
+                <h3 class="text-lg font-extrabold text-white">Bò Né Chảo Gang & Khay Bò Tươi Ướp Sẵn</h3>
+              </div>
+              <span class="px-3 py-1 rounded-xl bg-burgundy text-gold font-extrabold text-sm border border-gold/40">
+                Từ 50.000đ
+              </span>
+            </div>
+          </div>
+
+          <!-- Two Secondary Image Frames: Owner Portrait & Restaurant Space -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="relative rounded-2xl overflow-hidden border border-gold/50 bg-charcoal shadow-lg group">
+              <img
+                src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=500&q=80"
+                onerror="this.src='https://placehold.co/400x300/631212/F3E5AB?text=ANH+CHU+QUAN+BA+THANH'"
+                alt="Chân dung chủ quán Bá Thành"
+                class="w-full h-36 object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute top-2 left-2 bg-charcoal/85 text-gold-light text-[10px] font-bold px-2 py-1 rounded border border-gold/30">
+                [ẢNH CHÂN DUNG CHỦ QUÁN]
+              </div>
+              <div class="absolute bottom-0 inset-x-0 bg-black/80 p-2 text-center">
+                <p class="text-xs font-bold text-white">Ông Chủ Bá Thành</p>
+                <p class="text-[11px] text-gold">Cam kết thịt tươi mỗi sáng</p>
+              </div>
+            </div>
+
+            <div class="relative rounded-2xl overflow-hidden border border-gold/50 bg-charcoal shadow-lg group">
+              <img
+                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80"
+                onerror="this.src='https://placehold.co/400x300/1F1A17/D4AF37?text=ANH+KHONG+GIAN+QUAN'"
+                alt="Không gian quán Quận 12"
+                class="w-full h-36 object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute top-2 left-2 bg-charcoal/85 text-gold-light text-[10px] font-bold px-2 py-1 rounded border border-gold/30">
+                [ẢNH KHÔNG GIAN QUÁN]
+              </div>
+              <div class="absolute bottom-0 inset-x-0 bg-black/80 p-2 text-center">
+                <p class="text-xs font-bold text-white">15 - 20 Bàn Thoáng Mát</p>
+                <p class="text-[11px] text-gold">Bếp 1 chiều - Lên món 90s</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK NAVIGATION RIBBON FOR OWNER vs CUSTOMER -->
+  <div class="bg-cream-warm border-b border-gold/30 py-3 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm">
+      <div class="flex items-center gap-2 text-charcoal font-medium">
+        <span class="w-2.5 h-2.5 rounded-full bg-green-600 animate-ping"></span>
+        <span><strong>Trạng thái bếp Quận 12:</strong> Đang mở cửa nhận đơn ăn tại chỗ, đặt bàn & giao bò tươi ướp sẵn.</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-charcoal-muted font-semibold">Lối tắt cho Ông Chủ Bá Thành:</span>
+        <a href="#bang-tinh-kinh-doanh" class="px-3 py-1 rounded-lg bg-burgundy text-white font-bold hover:bg-burgundy-dark transition">
+          <i class="fa-solid fa-Coins mr-1 text-gold"></i> Tính Lãi 100 - 1.000 Suất
+        </a>
+        <a href="#phan-tich-chien-luoc" class="px-3 py-1 rounded-lg bg-gold/25 text-charcoal font-bold border border-gold/50 hover:bg-gold/40 transition">
+          <i class="fa-solid fa-clipboard-list mr-1 text-burgundy"></i> Nỗi Đau & Lộ Trình Ngày/Tuần/Tháng
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: DANH MỤC THỰC ĐƠN & GIỎ HÀNG THÔNG MINH -->
+  <section id="thuc-don" class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div>
+        <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-burgundy bg-burgundy-soft px-3 py-1 rounded-full border border-burgundy/20">
+          <i class="fa-solid fa-fire"></i> Thực Đơn Chuẩn Định Lượng & Bò Tươi Bán Lẻ
+        </span>
+        <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-charcoal mt-2">
+          Đặt Suất Ăn Nóng Hổi & Bò Ướp Sẵn Mang Về
+        </h2>
+        <p class="text-charcoal-muted text-sm sm:text-base mt-1">
+          Đặt trực tiếp trên Website để hưởng giá gốc tại quán, không mất 25% - 30% phí qua ứng dụng trung gian.
+        </p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2" id="menuCategoryTabs">
+        <button onclick="filterMenu('all')" data-cat="all" class="menu-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm burgundy-btn shadow-sm transition">
+          Tất Cả Món (12)
+        </button>
+        <button onclick="filterMenu('dinein')" data-cat="dinein" class="menu-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cream-warm text-charcoal hover:bg-gold/20 border border-charcoal/10 transition">
+          <i class="fa-solid fa-plate-wheat mr-1 text-burgundy"></i> Suất Ăn Tại Chỗ
+        </button>
+        <button onclick="filterMenu('freshbeef')" data-cat="freshbeef" class="menu-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cream-warm text-charcoal hover:bg-gold/20 border border-charcoal/10 transition">
+          <i class="fa-solid fa-box-open mr-1 text-burgundy"></i> Bò Tươi Ướp Sẵn (Bán Lẻ)
+        </button>
+        <button onclick="filterMenu('upsell')" data-cat="upsell" class="menu-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cream-warm text-charcoal hover:bg-gold/20 border border-charcoal/10 transition">
+          <i class="fa-solid fa-plus-circle mr-1 text-burgundy"></i> Món Thêm & Đồ Uống
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Layout: Menu Grid (8 cols) + Live Order Cart Box (4 cols) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Menu Items Grid -->
+      <div class="lg:col-span-8 space-y-6">
+        <div id="menuGridContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- Rendered dynamically via script.js -->
+        </div>
+
+        <!-- Upsell Banner to solve "Giá trị đơn thấp" pain point -->
+        <div class="p-5 rounded-2xl bg-gradient-to-r from-burgundy to-burgundy-dark text-cream border border-gold/40 shadow-warm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded bg-gold text-charcoal">
+              Bí Quyết Tăng Giá Trị Đơn Hàng (Upsell)
+            </span>
+            <h3 class="text-lg font-extrabold text-white mt-1">
+              Thêm Trứng Lòng Đào + Pate Gan + Nước Sâm Mát Lạnh!
+            </h3>
+            <p class="text-xs sm:text-sm text-cream/85">
+              Khách gọi kèm combo món phụ giúp bữa ăn tròn vị hơn, đồng thời giúp quán tăng thêm 20.000đ - 35.000đ doanh thu/khách.
+            </p>
+          </div>
+          <button onclick="quickAddUpsellCombo()" class="shrink-0 gold-btn font-extrabold text-sm px-5 py-3 rounded-xl shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-cart-plus"></i> Thêm Combo Phụ (+37.000đ)
+          </button>
+        </div>
+      </div>
+
+      <!-- Sticky Smart Cart & Zalo Checkout Panel -->
+      <div class="lg:col-span-4 lg:sticky lg:top-24 bg-white rounded-3xl border-2 border-gold/50 shadow-warm overflow-hidden">
+        <div class="bg-charcoal text-cream p-4 sm:p-5 flex items-center justify-between border-b border-gold/30">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-gold text-charcoal flex items-center justify-center font-extrabold">
+              <i class="fa-solid fa-basket-shopping"></i>
+            </div>
+            <div>
+              <h3 class="font-extrabold text-base text-white">Giỏ Hàng Thông Minh</h3>
+              <p class="text-xs text-gold-light">Tự động cộng tiền & gửi qua Zalo</p>
+            </div>
+          </div>
+          <button onclick="clearCart()" class="text-xs text-cream/70 hover:text-red-400 underline">
+            Xóa hết
+          </button>
+        </div>
+
+        <div class="p-4 sm:p-5 space-y-4">
+          <!-- Cart Items List -->
+          <div id="inlineCartItems" class="max-h-64 overflow-y-auto space-y-2.5 pr-1">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Smart Upsell Quick Pills inside Cart -->
+          <div class="pt-2 border-t border-dashed border-charcoal/15">
+            <p class="text-xs font-bold text-burgundy mb-2 flex items-center gap-1">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Gợi ý gọi kèm cực ngon:
+            </p>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="addToCart('up-trung')" class="text-xs px-2.5 py-1.5 rounded-lg bg-cream-warm hover:bg-gold/30 border border-gold/40 font-semibold transition">
+                + Trứng lòng đào (10k)
+              </button>
+              <button onclick="addToCart('up-pate')" class="text-xs px-2.5 py-1.5 rounded-lg bg-cream-warm hover:bg-gold/30 border border-gold/40 font-semibold transition">
+                + Pate nhà làm (15k)
+              </button>
+              <button onclick="addToCart('up-nuocsam')" class="text-xs px-2.5 py-1.5 rounded-lg bg-cream-warm hover:bg-gold/30 border border-gold/40 font-semibold transition">
+                + Nước sâm/Trà tắc (12k)
+              </button>
+            </div>
+          </div>
+
+          <!-- Total Breakdown -->
+          <div class="p-3.5 rounded-2xl bg-cream-warm border border-gold/40 space-y-1.5">
+            <div class="flex justify-between text-xs text-charcoal-muted">
+              <span>Số lượng món:</span>
+              <span id="cartTotalQty" class="font-bold text-charcoal">0 món</span>
+            </div>
+            <div class="flex justify-between items-center pt-1 border-t border-charcoal/10">
+              <span class="text-sm font-bold text-charcoal">TỔNG THANH TOÁN:</span>
+              <span id="cartTotalPrice" class="text-xl font-extrabold text-burgundy">0 đồng</span>
+            </div>
+          </div>
+
+          <!-- Customer Delivery / Table Info -->
+          <div class="space-y-2.5 pt-1">
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Hình thức phục vụ:</label>
+              <select id="orderServiceType" class="w-full px-3 py-2.5 rounded-xl border border-charcoal/20 bg-cream text-sm font-semibold focus:outline-none focus:border-burgundy">
+                <option value="Giao tận nơi tại Quận 12">🛵 Giao tận nơi tại Quận 12</option>
+                <option value="Ghé quán lấy mang về (Đã chuẩn bị sẵn)">🛍️ Ghé quán lấy mang về (Không phải chờ)</option>
+                <option value="Gọi món tại bàn (Quét mã QR)">🍽️ Gọi món ăn tại bàn (Quét QR tại bàn)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <input id="custName" type="text" placeholder="Tên anh/chị..." class="w-full px-3 py-2.5 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+              <input id="custPhone" type="tel" placeholder="Số điện thoại..." class="w-full px-3 py-2.5 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+            </div>
+
+            <input id="custAddress" type="text" placeholder="Địa chỉ giao tại Quận 12 hoặc Số bàn (VD: Bàn số 5)..." class="w-full px-3 py-2.5 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+            <input id="custNote" type="text" placeholder="Ghi chú: Bò chín kỹ / tái, ít hành, thêm ớt..." class="w-full px-3 py-2 rounded-xl border border-charcoal/20 text-xs focus:outline-none focus:border-burgundy" />
+          </div>
+
+          <!-- Submit Order via Zalo -->
+          <button onclick="checkoutViaZalo()" class="w-full py-3.5 px-4 rounded-2xl burgundy-btn font-extrabold text-sm sm:text-base shadow-warm flex items-center justify-center gap-2 transition transform active:scale-95">
+            <i class="fa-solid fa-paper-plane text-gold"></i>
+            <span>SAO CHÉP & GỬI ĐƠN QUA ZALO</span>
+          </button>
+          <p class="text-[11px] text-center text-charcoal-muted">
+            Hệ thống sẽ tự động sao chép chi tiết đơn hàng và mở Zalo số <strong class="phone-sync-text text-burgundy">0392755766</strong> của chủ quán.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: BIỂU MẪU ĐẶT BÀN NHANH GIỜ CAO ĐIỂM -->
+  <section id="dat-ban" class="py-12 sm:py-16 bg-cream-warm border-y border-gold/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Left Explanation: Solving the Peak Hour Bottleneck -->
+        <div class="lg:col-span-5 space-y-4">
+          <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-burgundy text-gold">
+            <i class="fa-solid fa-clock"></i> Giải Pháp Xóa Nghẽn Cổ Chai Giờ Cao Điểm
+          </span>
+          <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-charcoal">
+            Đặt Bàn Trước – Lên Món Nóng Hổi Trong 90 Giây
+          </h2>
+          <p class="text-charcoal-muted text-sm sm:text-base leading-relaxed">
+            Vào khung giờ cao điểm sáng (06:30 – 09:30) và tối (17:30 – 20:30), quán phục vụ hơn 200 lượt khách. Đặt bàn trước giúp bếp chuẩn bị sẵn khay bò tươi 120g và làm nóng chảo gang, khách vừa ngồi xuống là có món ngay!
+          </p>
+
+          <div class="space-y-3 pt-2">
+            <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-gold/30 shadow-sm">
+              <div class="w-10 h-10 rounded-xl bg-burgundy text-gold flex items-center justify-center shrink-0 font-bold">
+                1
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-charcoal">Giữ chỗ bàn đẹp & thoáng mát</h4>
+                <p class="text-xs text-charcoal-muted">15 – 20 bàn inox/gỗ sạch sẽ, dễ dàng ghép bàn cho gia đình hoặc nhóm đồng nghiệp Quận 12.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-gold/30 shadow-sm">
+              <div class="w-10 h-10 rounded-xl bg-burgundy text-gold flex items-center justify-center shrink-0 font-bold">
+                2
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-charcoal">Tặng ngay 01 Trứng Ốp La hoặc Trà Tắc</h4>
+                <p class="text-xs text-charcoal-muted">Dành riêng cho khách đặt bàn trước qua Website và kết nối Zalo khách hàng thân thiết.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Booking Form -->
+        <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border-2 border-gold/50 shadow-warm">
+          <h3 class="text-xl font-extrabold text-burgundy mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-calendar-plus text-gold-dark"></i> Phiếu Đặt Bàn Nhanh Qua Zalo Chủ Quán
+          </h3>
+          <form id="bookingForm" onsubmit="submitTableBooking(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Họ và tên khách đặt *</label>
+              <input id="bookName" type="text" required placeholder="VD: Anh Minh / Chị Lan" class="w-full px-3.5 py-3 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Số điện thoại liên hệ *</label>
+              <input id="bookPhone" type="tel" required placeholder="VD: 0909xxxxxx" class="w-full px-3.5 py-3 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Ngày đến dùng bữa *</label>
+              <input id="bookDate" type="date" required class="w-full px-3.5 py-3 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Khung giờ đến quán *</label>
+              <select id="bookTimeSlot" class="w-full px-3.5 py-3 rounded-xl border border-charcoal/20 text-sm font-semibold focus:outline-none focus:border-burgundy">
+                <option value="Ca Sáng Cao Điểm (06:30 - 09:30)">🌅 Ca Sáng Cao Điểm (06:30 - 09:30)</option>
+                <option value="Ca Trưa Văn Phòng (11:00 - 13:30)">☀️ Ca Trưa Văn Phòng (11:00 - 13:30)</option>
+                <option value="Ca Tối Gia Đình (17:30 - 20:30)">🌙 Ca Tối Gia Đình (17:30 - 20:30)</option>
+                <option value="Khung giờ thường (09:30 - 11:00 / 14:00 - 17:00)">🕒 Khung giờ thường trong ngày</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Số lượng khách</label>
+              <select id="bookGuests" class="w-full px-3.5 py-3 rounded-xl border border-charcoal/20 text-sm font-semibold focus:outline-none focus:border-burgundy">
+                <option value="2 người (1 bàn đôi)">2 người (1 bàn đôi)</option>
+                <option value="4 người (Bàn gia đình)">4 người (Bàn gia đình)</option>
+                <option value="6 - 8 người (Ghép 2 bàn)">6 - 8 người (Ghép 2 bàn)</option>
+                <option value="Trên 10 người (Đoàn khách)">Trên 10 người (Đặt tiệc/Đoàn)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-charcoal mb-1">Dặn món trước (Lên món trong 90s)</label>
+              <input id="bookPreorder" type="text" placeholder="VD: 2 Bò né đặc biệt, 1 खाय bò 500g mang về..." class="w-full px-3.5 py-3 rounded-xl border border-charcoal/20 text-sm focus:outline-none focus:border-burgundy" />
+            </div>
+            <div class="sm:col-span-2 pt-2">
+              <button type="submit" class="w-full py-4 rounded-2xl gold-btn font-extrabold text-base shadow-gold flex items-center justify-center gap-2 transition">
+                <i class="fa-solid fa-check-double"></i>
+                <span>XÁC NHẬN ĐẶT BÀN & NHẬN ƯU ĐÃI QUA ZALO</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: BẢNG ĐIỀU KHIỂN TÍNH TOÁN KINH DOANH & NHÂN SỰ (100 - 200 - 1.000 SUẤT/NGÀY) -->
+  <section id="bang-tinh-kinh-doanh" class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1 rounded-full bg-burgundy text-gold">
+        <i class="fa-solid fa-chart-pie"></i> Công Cụ Quản Trị Dành Cho Ông Chủ Bá Thành
+      </span>
+      <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-charcoal mt-2">
+        Bài Toán Tài Chính: 100 Suất – 200 Suất – 1.000 Suất/Ngày
+      </h2>
+      <p class="text-charcoal-muted text-sm sm:text-base mt-2">
+        Tính toán rõ ràng tới từng đồng doanh thu Ngày, Tuần, Tháng, Giá vốn nguyên liệu (45%), Chi phí vận hành và Định biên nhân sự cần thiết để mở rộng quy mô.
+      </p>
+    </div>
+
+    <!-- Interactive Simulator Card -->
+    <div class="bg-white rounded-3xl border-2 border-burgundy/20 shadow-warm p-5 sm:p-8 mb-10">
+      <!-- Quick Milestone Buttons -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-charcoal/10">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-burgundy">Chọn nhanh mốc sản lượng:</span>
+          <p class="text-xs text-charcoal-muted">Bấm vào từng mốc hoặc kéo thanh trượt để xem lợi nhuận & số người phục vụ</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setCalculatorMilestone(100)" class="calc-preset-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-burgundy/30 bg-cream hover:bg-burgundy hover:text-white transition">
+            100 Suất/Ngày
+          </button>
+          <button onclick="setCalculatorMilestone(200)" class="calc-preset-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-burgundy bg-burgundy text-white shadow transition">
+            200 Suất/Ngày (Hiện tại)
+          </button>
+          <button onclick="setCalculatorMilestone(350)" class="calc-preset-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-burgundy/30 bg-cream hover:bg-burgundy hover:text-white transition">
+            350 Suất (Mục tiêu Tháng 1)
+          </button>
+          <button onclick="setCalculatorMilestone(500)" class="calc-preset-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-burgundy/30 bg-cream hover:bg-burgundy hover:text-white transition">
+            500 Suất/Ngày
+          </button>
+          <button onclick="setCalculatorMilestone(1000)" class="calc-preset-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold gold-btn shadow-sm transition">
+            🔥 1.000 Suất/Ngày
+          </button>
+        </div>
+      </div>
+
+      <!-- Sliders & Input Controls -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 py-6 items-center">
+        <div class="lg:col-span-6 space-y-4">
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="calcPortionsSlider" class="text-sm font-bold text-charcoal">
+                Sản lượng bán mỗi ngày:
+              </label>
+              <span id="calcPortionsBadge" class="px-3 py-1 rounded-lg bg-burgundy text-gold font-extrabold text-base">
+                200 suất/ngày
+              </span>
+            </div>
+            <input
+              id="calcPortionsSlider"
+              type="range"
+              min="50"
+              max="1200"
+              step="10"
+              value="200"
+              oninput="updateBusinessCalculator()"
+              class="w-full h-3 bg-cream-warm rounded-lg cursor-pointer"
+            />
+            <div class="flex justify-between text-[11px] text-charcoal-muted font-medium mt-1">
+              <span>50 suất</span>
+              <span>100 suất</span>
+              <span>200 suất</span>
+              <span>500 suất</span>
+              <span>1.000 suất</span>
+              <span>1.200 suất</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-3.5 rounded-2xl bg-cream-warm border border-gold/40">
+              <label class="block text-xs font-bold text-charcoal mb-1">
+                Đơn giá trung bình (Đồng/suất):
+              </label>
+              <input
+                id="calcUnitPrice"
+                type="number"
+                step="5000"
+                min="20000"
+                value="50000"
+                oninput="updateBusinessCalculator()"
+                class="w-full px-3 py-2 rounded-xl border border-charcoal/20 font-extrabold text-burgundy text-base bg-white"
+              />
+              <span class="text-[11px] text-charcoal-muted mt-1 block">Mặc định: 50.000đ/suất (Khay bò lẻ 100k-150k)</span>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-cream-warm border border-gold/40">
+              <label class="block text-xs font-bold text-charcoal mb-1">
+                Tỷ lệ Giá vốn nguyên liệu (%):
+              </label>
+              <input
+                id="calcCogsPercent"
+                type="number"
+                step="1"
+                min="30"
+                max="70"
+                value="45"
+                oninput="updateBusinessCalculator()"
+                class="w-full px-3 py-2 rounded-xl border border-charcoal/20 font-extrabold text-charcoal text-base bg-white"
+              />
+              <span class="text-[11px] text-charcoal-muted mt-1 block">Chuẩn định lượng: 45% (22.500đ/suất)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Calculated Financial Metrics (6 cols) -->
+        <div class="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+          <div class="p-4 rounded-2xl bg-cream-warm border border-charcoal/10">
+            <span class="text-xs font-semibold text-charcoal-muted">Doanh Thu Ngày</span>
+            <div id="resRevDay" class="text-lg sm:text-xl font-extrabold text-charcoal mt-1">10.000.000đ</div>
+            <span class="text-[11px] text-green-700 font-semibold">1 ngày vận hành</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-cream-warm border border-charcoal/10">
+            <span class="text-xs font-semibold text-charcoal-muted">Doanh Thu Tuần</span>
+            <div id="resRevWeek" class="text-lg sm:text-xl font-extrabold text-charcoal mt-1">70.000.000đ</div>
+            <span class="text-[11px] text-charcoal-muted">7 ngày/tuần</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-burgundy-soft border border-burgundy/30 col-span-2 sm:col-span-1">
+            <span class="text-xs font-bold text-burgundy">Doanh Thu Tháng</span>
+            <div id="resRevMonth" class="text-xl font-extrabold text-burgundy mt-1">300.000.000đ</div>
+            <span class="text-[11px] text-burgundy font-medium">30 ngày/tháng</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-cream-warm border border-charcoal/10">
+            <span class="text-xs font-semibold text-charcoal-muted">Giá Vốn Tháng (45%)</span>
+            <div id="resCogsMonth" class="text-base sm:text-lg font-extrabold text-charcoal mt-1">135.000.000đ</div>
+            <span id="resCogsPerUnit" class="text-[11px] text-charcoal-muted">22.500đ/suất</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-cream-warm border border-charcoal/10">
+            <span class="text-xs font-semibold text-charcoal-muted">Vận Hành & Nhân Sự</span>
+            <div id="resOpexMonth" class="text-base sm:text-lg font-extrabold text-charcoal mt-1">75.000.000đ</div>
+            <span id="resOpexRatio" class="text-[11px] text-charcoal-muted">Chiếm ~25% doanh thu</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-gradient-to-br from-burgundy to-burgundy-dark text-white border border-gold col-span-2 sm:col-span-1 shadow-md">
+            <span class="text-xs font-bold text-gold">LỢI NHUẬN RÒNG THÁNG</span>
+            <div id="resNetProfitMonth" class="text-xl font-extrabold text-white mt-1">90.000.000đ</div>
+            <span id="resNetProfitDay" class="text-[11px] text-gold-light font-semibold">Lãi 3.000.000đ/ngày</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Operational & Staffing Recommendation Box -->
+      <div class="mt-2 p-5 rounded-2xl bg-cream-warm border-2 border-gold/50 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div>
+          <div class="text-xs font-extrabold uppercase text-burgundy flex items-center gap-1.5">
+            <i class="fa-solid fa-users-gear"></i> Định Biên Nhân Sự Đề Xuất
+          </div>
+          <div id="calcStaffTitle" class="text-base font-extrabold text-charcoal mt-1">
+            Cần 5 - 6 nhân sự chuyên trách
+          </div>
+          <p id="calcStaffDetail" class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+            1 Bếp chính đứng chảo, 1 Phụ bếp lên khay & nướng bánh mì, 2 Phục vụ chia dãy bàn, 1 Thu ngân điều phối đơn mang về và 1 Tạp vụ.
+          </p>
+        </div>
+
+        <div>
+          <div class="text-xs font-extrabold uppercase text-burgundy flex items-center gap-1.5">
+            <i class="fa-solid fa-fire-burner"></i> Năng Lực Bếp & Bàn Phục Vụ
+          </div>
+          <div id="calcKitchenTitle" class="text-base font-extrabold text-charcoal mt-1">
+            15 - 20 Bàn & 8 Họng Bếp Khò
+          </div>
+          <p id="calcKitchenDetail" class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+            Cân sẵn 200 khay thịt 120g bảo quản mát từ 5h30 sáng. Nồi ủ sốt luôn sôi để ra món trong 90 giây.
+          </p>
+        </div>
+
+        <div>
+          <div class="text-xs font-extrabold uppercase text-burgundy flex items-center gap-1.5">
+            <i class="fa-solid fa-bullseye"></i> Cơ Cấu Nguồn Khách & Chẩn Đoán
+          </div>
+          <div id="calcChannelTitle" class="text-base font-extrabold text-charcoal mt-1">
+            Kiểm Soát Thất Thoát Nguyên Liệu
+          </div>
+          <p id="calcChannelDetail" class="text-xs text-charcoal-muted mt-1 leading-relaxed">
+            Ở mức 200 suất/ngày, quán phải đạt lợi nhuận ròng ~3.000.000đ/ngày. Nếu thấp hơn mức này tức là đang thất thoát nguyên liệu hoặc nghẽn cổ chai.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed Benchmark Table: 100 vs 200 vs 1.000 Suất/Ngày -->
+    <div class="bg-white rounded-3xl border border-charcoal/15 shadow-sm overflow-hidden">
+      <div class="bg-charcoal text-cream px-6 py-4 flex flex-wrap items-center justify-between gap-2">
+        <h3 class="font-bold text-base sm:text-lg flex items-center gap-2">
+          <i class="fa-solid fa-table text-gold"></i>
+          Bảng Đối Chiếu Chuẩn: 100 Suất – 200 Suất – 1.000 Suất/Ngày (Đơn giá 50.000đ/suất)
+        </h3>
+        <span class="text-xs text-gold-light">Giá vốn chuẩn 45% (22.500đ/suất) | Vận hành & Nhân sự 20% - 30%</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-cream-warm border-b border-charcoal/15 text-charcoal font-extrabold">
+              <th class="py-3.5 px-4 sm:px-6">Chỉ tiêu tài chính</th>
+              <th class="py-3.5 px-4">Đơn vị</th>
+              <th class="py-3.5 px-4 text-right">Mốc 100 suất/ngày</th>
+              <th class="py-3.5 px-4 text-right bg-burgundy/5 text-burgundy">Mốc 200 suất/ngày (Hiện tại)</th>
+              <th class="py-3.5 px-4 sm:px-6 text-right bg-gold/15 text-charcoal">Mốc 1.000 suất/ngày (Đột phá)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-charcoal/10 font-medium">
+            <tr>
+              <td class="py-3.5 px-4 sm:px-6 font-bold">Doanh thu ngày</td>
+              <td class="py-3.5 px-4 text-charcoal-muted">Đồng</td>
+              <td class="py-3.5 px-4 text-right font-bold">5.000.000</td>
+              <td class="py-3.5 px-4 text-right font-bold bg-burgundy/5 text-burgundy">10.000.000</td>
+              <td class="py-3.5 px-4 sm:px-6 text-right font-extrabold bg-gold/15">50.000.000</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 sm:px-6 font-bold">Doanh thu tuần (7 ngày)</td>
+              <td class="py-3.5 px-4 text-charcoal-muted">Đồng</td>
+              <td class="py-3.5 px-4 text-right font-bold">35.000.000</td>
+              <td class="py-3.5 px-4 text-right font-bold bg-burgundy/5 text-burgundy">70.000.000</td>
+              <td class="py-3.5 px-4 sm:px-6 text-right font-extrabold bg-gold/15">350.000.000</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 sm:px-6 font-bold">Doanh thu tháng (30 ngày)</td>
+              <td class="py-3.5 px-4 text-charcoal-muted">Đồng</td>
+              <td class="py-3.5 px-4 text-right font-bold">150.000.000</td>
+              <td class="py-3.5 px-4 text-right font-bold bg-burgundy/5 text-burgundy">300.000.000</td>
+              <td class="py-3.5 px-4 sm:px-6 text-right font-extrabold bg-gold/15">1.500.000.000</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 sm:px-6 font-bold">Giá vốn nguyên liệu tháng (45%)</td>
+              <td class="py-3.5 px-4 text-charcoal-muted">Đồng</td>
+              <td class="py-3.5 px-4 text-right">67.500.000</td>
+              <td class="py-3.5 px-4 text-right bg-burgundy/5">135.000.000</td>
+              <td class="py-3.5 px-4 sm:px-6 text-right bg-gold/15">675.000.000</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 sm:px-6 font-bold">Chi phí vận hành & nhân sự tháng</td>
+              <td class="py-3.5 px-4 text-charcoal-muted">Đồng</td>
+              <td class="py-3.5 px-4 text-right">45.000.000 (3 người)</td>
+              <td class="py-3.5 px-4 text-right bg-burgundy/5">75.000.000 (5-6 người)</td>
+              <td class="py-3.5 px-4 sm:px-6 text-right bg-gold/15">300.000.000 (18-20 người)</td>
+            </tr>
+            <tr class="bg-burgundy-soft/60">
+              <td class="py-4 px-4 sm:px-6 font-extrabold text-burgundy">LỢI NHUẬN RÒNG THÁNG</td>
+              <td class="py-4 px-4 font-bold text-burgundy">Đồng</td>
+              <td class="py-4 px-4 text-right font-extrabold text-burgundy">37.500.000</td>
+              <td class="py-4 px-4 text-right font-extrabold text-burgundy bg-burgundy/10">90.000.000</td>
+              <td class="py-4 px-4 sm:px-6 text-right font-extrabold text-burgundy bg-gold/30 text-base">525.000.000</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 sm:px-6 font-bold text-green-800">Lãi ròng bỏ túi mỗi ngày</td>
+              <td class="py-3 px-4 text-green-800">Đồng/ngày</td>
+              <td class="py-3 px-4 text-right font-bold text-green-800">1.250.000</td>
+              <td class="py-3 px-4 text-right font-bold text-green-800 bg-burgundy/5">3.000.000</td>
+              <td class="py-3 px-4 sm:px-6 text-right font-extrabold text-green-800 bg-gold/15">17.500.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: CHẨN ĐOÁN NỖI ĐAU, CHUẨN HÓA BẾP & KẾ HOẠCH NGÀY - TUẦN - THÁNG -->
+  <section id="phan-tich-chien-luoc" class="py-12 sm:py-16 bg-cream-warm border-t border-gold/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+      <!-- Header -->
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1 rounded-full bg-charcoal text-gold">
+          <i class="fa-solid fa-stethoscope"></i> Cẩm Nang Vận Hành Thực Chiến Quận 12
+        </span>
+        <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-charcoal mt-2">
+          Chẩn Đoán Nỗi Đau & Giải Pháp Toàn Diện Cho Cửa Hàng
+        </h2>
+        <p class="text-charcoal-muted text-sm sm:text-base mt-2">
+          Giải đáp câu hỏi: <em>"Vì sao đang bán 200 khách/ngày mà vẫn thấy kém hiệu quả, cực thân và cần làm gì để nâng cấp?"</em>
+        </p>
+      </div>
+
+      <!-- Part 1: 4 Pain Points Grid -->
+      <div>
+        <h3 class="text-lg sm:text-xl font-extrabold text-burgundy mb-4 flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-burgundy text-gold inline-flex items-center justify-center text-sm">1</span>
+          4 Khó Khăn & Nỗi Đau Khiến 200 Khách/Ngày Vẫn Kém Hiệu Quả
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-white p-5 rounded-2xl border-l-4 border-burgundy shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-burgundy-soft text-burgundy flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid fa-hourglass-half"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-charcoal">1. Nghẽn cổ chai giờ cao điểm</h4>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              Khách dồn vào 2 tiếng cao điểm sáng hoặc tối khiến bếp quá tải, khách chờ lâu mất kiên nhẫn bỏ đi và bàn không kịp thu dọn.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border-l-4 border-burgundy shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-burgundy-soft text-burgundy flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid fa-scale-unbalanced"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-charcoal">2. Định lượng cảm tính</h4>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              Không cân đo chính xác số gram thịt bò, bơ, sốt và dầu ăn trên từng phần khiến chi phí nguyên liệu đội lên quá 50% doanh thu.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border-l-4 border-burgundy shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-burgundy-soft text-burgundy flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid fa-arrow-trend-down"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-charcoal">3. Giá trị đơn hàng thấp</h4>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              Khách chỉ gọi 1 suất cơ bản rồi về, thiếu các món bán kèm lãi cao như trứng lòng đào, pate, nước mát hay thịt bò ướp sẵn mang về.
+            </p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border-l-4 border-burgundy shadow-sm space-y-2">
+            <div class="w-10 h-10 rounded-xl bg-burgundy-soft text-burgundy flex items-center justify-center font-bold text-lg">
+              <i class="fa-solid fa-link-slash"></i>
+            </div>
+            <h4 class="font-extrabold text-base text-charcoal">4. Đứt gãy kết nối khách quen</h4>
+            <p class="text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+              200 khách đến ăn mỗi ngày nhưng cửa hàng không lưu lại số Zalo hay tương tác Facebook, dẫn đến mất khách quen vào tay đối thủ.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 2: Kitchen, Table & Service Standardization -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-3xl border border-gold/40 shadow-sm space-y-4">
+          <h3 class="text-lg font-extrabold text-burgundy flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-burgundy text-gold inline-flex items-center justify-center text-sm">2</span>
+            Chuẩn Hóa Bếp Núc, Bàn Phục Vụ & Nhân Sự
+          </h3>
+          <ul class="space-y-3 text-sm text-charcoal">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-kitchen-set text-burgundy mt-1"></i>
+              <span><strong>Tối ưu khu bếp 1 chiều:</strong> Bàn sơ chế cân sẵn từng khay thịt 120g bảo quản mát; dàn 8 – 10 họng bếp khò làm nóng chảo gang đồng loạt và nồi ủ sốt luôn sôi để ra món trong <strong>90 giây</strong>.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-chair text-burgundy mt-1"></i>
+              <span><strong>Tối ưu bàn ghế:</strong> Bố trí 15 – 20 bàn inox hoặc gỗ mặt gọn dễ ghép tách; trên mỗi bàn có sẵn khay gia vị, giấy ăn và bảng mã QR dẫn thẳng vào Website gọi món và nhóm Zalo ưu đãi.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-user-check text-burgundy mt-1"></i>
+              <span><strong>Định biên 100 suất (3 người):</strong> 1 bếp chính đứng chảo, 1 phụ bếp kiêm rửa chén và 1 nhân viên chạy bàn kiêm thu ngân.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-users text-burgundy mt-1"></i>
+              <span><strong>Định biên 200 suất (5 - 6 người):</strong> 1 bếp chính, 1 phụ bếp lên khay và nướng bánh mì, 2 phục vụ chia dãy bàn, 1 thu ngân điều phối đơn mang về và 1 tạp vụ.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-rocket text-burgundy mt-1"></i>
+              <span><strong>Định biên tăng trưởng:</strong> 350 – 500 suất cần 8 – 10 người; mốc 1.000 suất/ngày cần 18 – 20 nhân sự chia 2 ca sáng tối cùng đội đóng gói giao hàng riêng.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-3xl border border-gold/40 shadow-sm space-y-4">
+          <h3 class="text-lg font-extrabold text-burgundy flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-burgundy text-gold inline-flex items-center justify-center text-sm">3</span>
+            Thái Độ Phục Vụ & Hệ Sinh Thái Đa Kênh Quận 12
+          </h3>
+          <div class="p-3.5 rounded-2xl bg-burgundy-soft border border-burgundy/20">
+            <div class="font-extrabold text-burgundy text-sm">Quy Chuẩn Phục Vụ "3 GIÂY – 3 PHÚT – 3 CÂU HỎI":</div>
+            <p class="text-xs sm:text-sm text-charcoal mt-1">
+              • <strong>3 giây chào hỏi</strong> ngay khi khách vừa dừng xe trước quán.<br/>
+              • <strong>3 phút lên món</strong> nóng hổi trên bàn.<br/>
+              • <strong>3 câu hỏi thăm</strong> khi khách thanh toán để tạo thiện cảm tuyệt đối.
+            </p>
+          </div>
+          <ul class="space-y-2.5 text-sm text-charcoal">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-globe text-burgundy mt-1"></i>
+              <span><strong>Vai trò Website:</strong> Trung tâm trưng bày thực đơn, bảng giá minh bạch, đặt bàn trước giờ cao điểm và nhận đơn giao hàng trực tiếp không mất 25% – 30% chiết khấu.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-brands fa-facebook text-blue-600 mt-1"></i>
+              <span><strong>Vai trò Facebook:</strong> Đăng đều đặn video ngắn quay cảnh thịt bò tươi mỗi sáng, tiếng chảo gang xèo xèo và phản hồi thực khách Quận 12 để kéo khách mới bán kính 5 km.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-comment-dots text-green-600 mt-1"></i>
+              <span><strong>Vai trò Zalo & Số điện thoại:</strong> Lưu danh bạ khách thân thiết, gửi tin nhắn tặng 1 trứng ốp la hoặc phiếu giảm giá cho lần ăn tiếp theo và nhận đặt thịt bò ướp sẵn cuối tuần.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Part 3: Day - Week - Month Action Plan -->
+      <div>
+        <h3 class="text-lg sm:text-xl font-extrabold text-burgundy mb-4 flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-burgundy text-gold inline-flex items-center justify-center text-sm">4</span>
+          Kế Hoạch Hành Động Chi Tiết Theo Ngày – Tuần – Tháng
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Daily Schedule -->
+          <div class="bg-white p-6 rounded-3xl border border-charcoal/10 shadow-sm space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-burgundy text-white text-xs font-bold">
+              <i class="fa-regular fa-clock"></i> LỊCH TRÌNH HÀNG NGÀY
+            </div>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-charcoal">
+              <li><strong>• 05h30:</strong> Kiểm tra chất lượng thịt bò tươi mới nhập và chia khay định lượng 120g.</li>
+              <li><strong>• 06h30 – 09h30:</strong> Tập trung tối đa tốc độ phục vụ giờ cao điểm sáng và mời khách quét mã Zalo tại bàn.</li>
+              <li><strong>• 14h00:</strong> Quay & đăng 1 video ngắn cảnh sơ chế bò hoặc chảo bò xèo xèo lên Facebook/Zalo.</li>
+              <li><strong>• 21h00:</strong> Kiểm kê tồn kho thịt bò, đối chiếu số khay đã bán và chốt sổ thu chi trong ngày.</li>
+            </ul>
+          </div>
+
+          <!-- 4-Week Roadmap -->
+          <div class="bg-white p-6 rounded-3xl border border-charcoal/10 shadow-sm space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold text-charcoal text-xs font-extrabold">
+              <i class="fa-solid fa-calendar-week"></i> LỘ TRÌNH 4 TUẦN ĐẦU TIÊN
+            </div>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-charcoal">
+              <li><strong>• Tuần 1:</strong> Chuẩn hóa định lượng bếp (cân tiểu ly, khay 120g, muỗng đong sốt) chống thất thoát.</li>
+              <li><strong>• Tuần 2:</strong> Đưa Website và bảng mã QR vào vận hành thực tế trên toàn bộ 15 – 20 bàn.</li>
+              <li><strong>• Tuần 3:</strong> Tung gói Bò tươi ướp sẵn mang về (300g, 500g, 1kg) và chạy quảng cáo bán kính 3 km quanh Quận 12.</li>
+              <li><strong>• Tuần 4:</strong> Đo lường hiệu quả và thưởng nóng nhân viên theo số suất bán vượt mốc 200 suất/ngày.</li>
+            </ul>
+          </div>
+
+          <!-- Monthly Target -->
+          <div class="bg-gradient-to-br from-charcoal to-burgundy-dark text-cream p-6 rounded-3xl border border-gold/40 shadow-sm space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold text-charcoal text-xs font-extrabold">
+              <i class="fa-solid fa-trophy"></i> MỤC TIÊU HÀNG THÁNG
+            </div>
+            <ul class="space-y-3 text-xs sm:text-sm text-cream/90">
+              <li>
+                <strong class="text-gold">• Tháng thứ 1:</strong> Nâng sản lượng từ <strong>200 lên 350 suất/ngày</strong> nhờ tăng vòng quay bàn giờ cao điểm và đẩy mạnh khách mua mang về.
+              </li>
+              <li>
+                <strong class="text-gold">• Tháng thứ 2 – Tháng thứ 6:</strong> Mở rộng kênh giao hàng quanh Quận 12 (300 suất) và đại lý/khách mua khay bò tươi ướp sẵn qua Website/Zalo (300 phần) để chạm mốc <strong>1.000 suất/ngày</strong> (Lãi ròng ~525 triệu/tháng).
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: SIÊU CÂU LỆNH RISEN & HƯỚNG DẪN TRIỂN KHAI (README.MD) -->
+  <section id="sieu-cau-lenh" class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="bg-white rounded-3xl border-2 border-charcoal/15 shadow-warm overflow-hidden">
+      <div class="bg-charcoal text-cream p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 border-b border-gold/30">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-gold">Tài Liệu Kỹ Thuật & Lưu Trữ Cho Ông Chủ</span>
+          <h2 class="font-display font-bold text-xl sm:text-2xl text-white mt-0.5">
+            Siêu Câu Lệnh Tạo Website (Chuẩn RISEN) & Hướng Dẫn Đưa Lên GitHub Pages
+          </h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="copyRisenPrompt()" class="gold-btn font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-xl flex items-center gap-2 shadow">
+            <i class="fa-regular fa-copy"></i> Sao Chép Siêu Câu Lệnh RISEN
+          </button>
+        </div>
+      </div>
+
+      <div class="p-5 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left: RISEN Prompt Box (7 cols) -->
+        <div class="lg:col-span-7 space-y-3">
+          <h3 class="font-extrabold text-base text-burgundy flex items-center gap-2">
+            <i class="fa-solid fa-terminal"></i> Nội Dung Siêu Câu Lệnh Tạo Website HTML (Chuẩn RISEN)
+          </h3>
+          <div id="risenPromptContent" class="p-4 rounded-2xl bg-cream-warm border border-charcoal/15 text-xs sm:text-sm text-charcoal space-y-2.5 max-h-96 overflow-y-auto leading-relaxed font-mono">
+            <p><strong>R - Vai trò (Role):</strong> Bạn là Chuyên gia Kiến trúc Website, Thiết kế Giao diện Trải nghiệm Người dùng và Lập trình viên cao cấp chuyên về ngành Ẩm thực và Chuỗi cửa hàng thực phẩm tại Việt Nam.</p>
+            <p><strong>I - Chỉ dẫn (Instructions):</strong> Hãy viết mã nguồn hoàn chỉnh, đầy đủ và hoạt động thực tế cho một bộ Website thương mại điện tử kết hợp quản trị vận hành dành cho thương hiệu <strong>Cửa hàng Bách Xanh - Bò Tươi & Bò Né Quận 12</strong> (cho phép thay đổi nhanh tên thương hiệu sang <strong>Quán Ăn 396 - Bò Né Bá Thành</strong> thông qua một đối tượng cấu hình duy nhất ở đầu tệp JavaScript). Website sử dụng thuần HTML5, CSS3 và JavaScript, tông màu Đỏ Đô - Vàng Đồng - Trắng Kem, hiển thị hoàn hảo trên điện thoại di động và triển khai được ngay lên GitHub Pages.</p>
+            <p><strong>S - Các bước thực hiện (Steps):</strong></p>
+            <p>1. Thiết lập cấu hình thương hiệu tập trung: Tên cửa hàng, Địa chỉ Quận 12 ([ĐỊA CHỈ CHI TIẾT QUẬN 12]), Số điện thoại & Zalo nhận đơn mặc định 0392755766 ([SỐ ĐIỆN THOẠI CHỦ QUÁN]), Đường dẫn Facebook ([ĐƯỜNG DẪN FACEBOOK CỦA QUÁN]) và khung ảnh giữ chỗ [ẢNH CHÂN DUNG CHỦ QUÁN], [ẢNH KHÔNG GIAN QUÁN], [ẢNH MÓN BÒ].</p>
+            <p>2. Xây dựng 7 phân khu chức năng: Thanh điều hướng cố định; Màn hình đầu tiên (Hero Section); Danh mục Thực đơn & Giỏ hàng thông minh gửi đơn qua Zalo; Khu vực Giải quyết nỗi đau & 4 Cam kết chất lượng; Biểu mẫu Đặt bàn nhanh giờ cao điểm; Bảng điều khiển Tính toán Kinh doanh & Nhân sự (100 - 200 - 1.000 suất/ngày); Chân trang & nút nổi góc phải.</p>
+            <p>3. Lưu giỏ hàng vào LocalStorage, giao diện chuẩn Mobile-First, nút bấm to rõ cho khách hàng mọi lứa tuổi.</p>
+            <p><strong>E - Kết quả đầu ra (End Goal):</strong> Mã nguồn đầy đủ kèm hướng dẫn README.md triển khai lên GitHub Pages miễn phí.</p>
+            <p><strong>N - Giới hạn & Thu hẹp (Narrowing):</strong> Sử dụng 100% tiếng Việt chuẩn xác, mộc mạc, uy tín, gần gũi với thực khách Quận 12.</p>
+          </div>
+        </div>
+
+        <!-- Right: 4-Step Deployment & README.md Guide (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <h3 class="font-extrabold text-base text-burgundy flex items-center gap-2">
+            <i class="fa-solid fa-book-open"></i> Hướng Dẫn Sử Dụng & Đăng Tải (README.md)
+          </h3>
+          <div class="space-y-3 text-xs sm:text-sm text-charcoal">
+            <div class="p-3.5 rounded-2xl bg-cream-warm border border-gold/40">
+              <div class="font-bold text-burgundy">Bước 1 – Cá nhân hóa thông tin trong 5 giây:</div>
+              <p class="mt-1 text-charcoal-muted">Bấm nút <strong>"Đổi SĐT Zalo / Địa chỉ"</strong> ở thanh trên cùng của trang web này hoặc sửa đối tượng <code>BRAND_CONFIG</code> trong mã nguồn để cập nhật số điện thoại, địa chỉ Quận 12 và ảnh thật của quán.</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-cream-warm border border-gold/40">
+              <div class="font-bold text-burgundy">Bước 2 – Kiểm tra Giỏ hàng & Bảng tính:</div>
+              <p class="mt-1 text-charcoal-muted">Thử chọn các suất Bò Né hoặc Khay Bò Tươi 500g vào giỏ hàng, bấm gửi đơn Zalo và kéo thanh trượt từ 100 đến 1.000 suất để kiểm tra bài toán lợi nhuận.</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-cream-warm border border-gold/40">
+              <div class="font-bold text-burgundy">Bước 3 – Đưa lên GitHub Pages miễn phí:</div>
+              <p class="mt-1 text-charcoal-muted">Tạo 1 kho lưu trữ (Repository) trên GitHub, tải tệp <code>index.html</code> này lên, vào mục <strong>Settings &rarr; Pages &rarr; chọn nhánh Main &rarr; Save</strong> để nhận đường dẫn Website chính thức tạo mã QR dán tại 20 bàn ăn.</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-burgundy-soft border border-burgundy/30">
+              <div class="font-bold text-burgundy flex items-center gap-1.5">
+                <i class="fa-solid fa-headset"></i> Hỗ trợ kỹ thuật Kiến Tạo Đời Mới:
+              </div>
+              <p class="mt-1 text-charcoal">
+                Khi cần hỗ trợ chỉnh sửa giao diện, gắn tên miền riêng hoặc kết nối Google Trang tính (Google Sheets), ông chủ liên hệ trực tiếp Zalo hỗ trợ:
+                <a href="https://zalo.me/0392755766" target="_blank" rel="noopener noreferrer" class="font-extrabold text-burgundy underline">0392755766</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: CHÂN TRANG (FOOTER) & BẢN ĐỒ ĐỊNH VỊ QUẬN 12 -->
+  <footer id="lien-he" class="bg-charcoal text-cream border-t-4 border-gold pt-12 pb-24 sm:pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-white/15">
+        <!-- Col 1: Brand Info (5 cols) -->
+        <div class="lg:col-span-5 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-2xl bg-burgundy flex items-center justify-center text-gold border border-gold">
+              <i class="fa-solid fa-fire-flame-curved text-xl"></i>
+            </div>
+            <div>
+              <h3 id="footerBrandName" class="font-display font-bold text-xl text-white">
+                Cửa Hàng Bách Xanh - Đặc Sản Bò Quận 12
+              </h3>
+              <p class="text-xs text-gold">Bò Tươi Mỗi Sáng – Nóng Hổi Từng Chảo</p>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-cream/80 leading-relaxed">
+            Hệ thống đặt suất ăn nóng hổi, đặt bàn trước giờ cao điểm và cung cấp thịt bò tươi ướp sẵn đóng khay chất lượng cao cho các gia đình tại Quận 12, TP. Hồ Chí Minh.
+          </p>
+          <div class="space-y-1.5 text-sm pt-1">
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-location-dot text-gold w-4"></i>
+              <span id="footerAddressText">[ĐỊA CHỈ CHI TIẾT QUẬN 12] - Quận 12, TP. Hồ Chí Minh</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i class="fa-solid fa-phone text-gold w-4"></i>
+              <span>Hotline & Zalo nhận đơn: <strong class="phone-sync-text text-gold">0392755766</strong></span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i class="fa-regular fa-clock text-gold w-4"></i>
+              <span>Giờ mở cửa: <strong>06:00 – 21:00</strong> (Phục vụ cả Chủ Nhật & Lễ)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links & Channels (3 cols) -->
+        <div class="lg:col-span-3 space-y-3">
+          <h4 class="font-extrabold text-sm uppercase tracking-wider text-gold">Kết Nối Đa Kênh</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li>
+              <a id="footerZaloLink" href="https://zalo.me/0392755766" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-cream/85 hover:text-gold transition">
+                <i class="fa-solid fa-comment-sms text-green-400"></i> Nhắn Zalo Đặt Bò & Nhận Ưu Đãi
+              </a>
+            </li>
+            <li>
+              <a id="footerFbLink" href="#lien-he" onclick="showFacebookPlaceholderNotice(event)" class="flex items-center gap-2 text-cream/85 hover:text-gold transition">
+                <i class="fa-brands fa-facebook text-blue-400"></i> Fanpage: <span id="footerFbText">[ĐƯỜNG DẪN FACEBOOK CỦA QUÁN]</span>
+              </a>
+            </li>
+            <li>
+              <a href="#thuc-don" class="flex items-center gap-2 text-cream/85 hover:text-gold transition">
+                <i class="fa-solid fa-qrcode text-gold"></i> Menu Điện Tử Quét QR Tại Bàn
+              </a>
+            </li>
+            <li>
+              <a href="#bang-tinh-kinh-doanh" class="flex items-center gap-2 text-cream/85 hover:text-gold transition">
+                <i class="fa-solid fa-chart-line text-gold"></i> Bảng Tính 100 – 1.000 Suất/Ngày
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Visual Map & Delivery Radius Card (4 cols) -->
+        <div class="lg:col-span-4">
+          <div class="p-4 rounded-2xl bg-white/5 border border-gold/30 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-gold uppercase">
+                <i class="fa-solid fa-map-location-dot mr-1"></i> Khu Vực Giao Nhanh Quận 12
+              </span>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-green-600/30 text-green-300 font-semibold">
+                Bán kính 5km
+              </span>
+            </div>
+            <p class="text-xs text-cream/80 leading-relaxed">
+              Giao nhanh trong 15 – 25 phút tại các phường: <strong>Hiệp Thành, Tân Chánh Hiệp, Trung Mỹ Tây, Thới An, Tân Thới Hiệp, Đông Hưng Thuận, An Phú Đông</strong> (Quận 12).
+            </p>
+            <div class="pt-1 flex gap-2">
+              <a id="footerCallBtn" href="tel:0392755766" class="flex-1 py-2.5 px-3 rounded-xl gold-btn text-center font-extrabold text-xs">
+                <i class="fa-solid fa-phone mr-1"></i> Gọi Hotline Quán
+              </a>
+              <a id="footerZaloBtn" href="https://zalo.me/0392755766" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-center font-bold text-xs transition">
+                Mở Zalo Quán
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/60">
+        <p>© 2026 Bản quyền thuộc về <strong id="copyrightBrand">Cửa hàng Bách Xanh - Bò Tươi & Bò Né Quận 12</strong> (Ông chủ Bá Thành).</p>
+        <p>
+          Hỗ trợ kỹ thuật & tối ưu câu lệnh Kiến Tạo Đời Mới:
+          <a href="https://zalo.me/0392755766" target="_blank" rel="noopener noreferrer" class="text-gold hover:underline font-semibold">Zalo 0392755766</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING RIGHT-HAND ACTION BUTTONS (GỌI ĐIỆN, ZALO, GIỎ HÀNG) -->
+  <div class="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2.5">
+    <a id="floatingZaloBtn" href="https://zalo.me/0392755766" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm shadow-xl border-2 border-white transition transform hover:scale-105">
+      <i class="fa-solid fa-comment-dots text-base"></i>
+      <span>Chat Zalo</span>
+    </a>
+
+    <a id="floatingCallBtn" href="tel:0392755766" class="flex items-center gap-2 px-4 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-extrabold text-xs sm:text-sm shadow-xl border-2 border-white transition transform hover:scale-105">
+      <i class="fa-solid fa-phone-volume text-base"></i>
+      <span class="phone-sync-text">0392755766</span>
+    </a>
+
+    <button onclick="toggleCartDrawer(true)" class="flex items-center gap-2 px-4 py-3.5 rounded-full burgundy-btn font-extrabold text-xs sm:text-sm shadow-2xl border-2 border-gold transition transform hover:scale-105">
+      <i class="fa-solid fa-cart-shopping text-gold text-base"></i>
+      <span>Giỏ hàng</span>
+      <span id="floatingCartCount" class="px-2 py-0.5 rounded-full bg-gold text-charcoal text-xs font-extrabold">0</span>
+    </button>
+  </div>
+
+  <!-- SLIDE-OVER CART DRAWER (DÀNH CHO DI ĐỘNG & XEM NHANH) -->
+  <div id="cartDrawerModal" class="fixed inset-0 z-50 hidden">
+    <div onclick="toggleCartDrawer(false)" class="absolute inset-0 bg-black/60 backdrop-blur-xs"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-cream shadow-2xl flex flex-col justify-between z-10">
+      <div class="p-5 bg-charcoal text-cream flex items-center justify-between border-b border-gold/40">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-cart-shopping text-gold text-xl"></i>
+          <div>
+            <h3 class="font-extrabold text-lg">Giỏ Hàng Của Quý Khách</h3>
+            <p class="text-xs text-gold-light">Gửi đơn trực tiếp qua Zalo chủ quán</p>
+          </div>
+        </div>
+        <button onclick="toggleCartDrawer(false)" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto flex-1 space-y-4">
+        <div id="drawerCartItems" class="space-y-3"></div>
+      </div>
+
+      <div class="p-5 bg-white border-t border-charcoal/15 space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="font-bold text-charcoal">Tổng cộng:</span>
+          <span id="drawerCartTotal" class="text-2xl font-extrabold text-burgundy">0 đồng</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <a href="#thuc-don" onclick="toggleCartDrawer(false)" class="py-3 px-4 rounded-xl border border-charcoal/20 text-center font-bold text-sm text-charcoal hover:bg-cream-warm">
+            Chọn thêm món
+          </a>
+          <button onclick="toggleCartDrawer(false); document.getElementById('custName').focus();" class="py-3 px-4 rounded-xl burgundy-btn font-extrabold text-sm">
+            Điền địa chỉ & Gửi Zalo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL THAY ĐỔI NHANH CẤU HÌNH THƯƠNG HIỆU (BRAND_CONFIG) -->
+  <div id="quickConfigModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div onclick="toggleQuickConfigModal()" class="absolute inset-0 bg-black/65 backdrop-blur-xs"></div>
+    <div class="relative z-10 bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 border-2 border-gold shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-charcoal/10 pb-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase text-burgundy">Cấu Hình Tập Trung (BRAND_CONFIG)</span>
+          <h3 class="text-xl font-extrabold text-charcoal">Tuỳ Chỉnh Thương Hiệu Trong 1 Giây</h3>
+        </div>
+        <button onclick="toggleQuickConfigModal()" class="w-8 h-8 rounded-lg bg-cream-warm text-charcoal hover:bg-burgundy hover:text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-sm">
+        <div>
+          <label class="block text-xs font-bold text-charcoal mb-1">Chọn mẫu thương hiệu có sẵn:</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="switchBrandPreset('bachxanh')" class="p-2.5 rounded-xl border border-burgundy bg-burgundy-soft text-burgundy font-bold text-xs">
+              Cửa hàng Bách Xanh (Bò Lẻ & Bò Né)
+            </button>
+            <button type="button" onclick="switchBrandPreset('bathanh')" class="p-2.5 rounded-xl border border-gold bg-gold/20 text-charcoal font-bold text-xs">
+              Quán Ăn 396 - Bò Né Bá Thành
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal mb-1">Tên thương hiệu hiển thị:</label>
+          <input id="cfgBrandName" type="text" class="w-full px-3.5 py-2.5 rounded-xl border border-charcoal/25 text-sm font-semibold" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal mb-1">Số điện thoại & Zalo nhận đơn:</label>
+          <input id="cfgPhone" type="tel" class="w-full px-3.5 py-2.5 rounded-xl border border-charcoal/25 text-sm font-semibold" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal mb-1">Địa chỉ cửa hàng tại Quận 12:</label>
+          <input id="cfgAddress" type="text" class="w-full px-3.5 py-2.5 rounded-xl border border-charcoal/25 text-sm font-semibold" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-charcoal mb-1">Đường dẫn Facebook của quán:</label>
+          <input id="cfgFacebook" type="text" class="w-full px-3.5 py-2.5 rounded-xl border border-charcoal/25 text-sm" />
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button onclick="toggleQuickConfigModal()" class="px-4 py-2.5 rounded-xl border border-charcoal/20 text-xs font-bold">
+          Đóng
+        </button>
+        <button onclick="saveCustomBrandConfig()" class="px-5 py-2.5 rounded-xl burgundy-btn text-xs font-extrabold shadow">
+          <i class="fa-solid fa-check mr-1"></i> Áp Dụng Ngay Lên Website
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM TOAST NOTIFICATION BOX (THAY THẾ HOÀN TOÀN ALERT) -->
+  <div id="toastContainer" class="fixed top-20 right-4 z-50 max-w-sm w-full pointer-events-none space-y-2"></div>
+
+  <!-- JAVASCRIPT: BRAND_CONFIG, CART SYSTEM, ZALO CHECKOUT & FINANCIAL SIMULATOR -->
+  <script>
+    /**
+     * 1. ĐỐI TƯỢNG CẤU HÌNH THƯƠNG HIỆU TẬP TRUNG (BRAND_CONFIG)
+     * Ông chủ Bá Thành có thể sửa trực tiếp các dòng dưới đây hoặc bấm nút đổi nhanh trên giao diện.
+     */
+    const BRAND_PRESETS = {
+      bachxanh: {
+        brandKey: 'bachxanh',
+        shortName: 'Cửa Hàng Bách Xanh',
+        fullName: 'Cửa hàng Bách Xanh - Đặc Sản Bò Quận 12',
+        tagline: 'Đặc Sản Bò Tươi Ướp Sẵn & Bò Né Nóng Hổi Quận 12',
+        address: '[ĐỊA CHỈ CHI TIẾT QUẬN 12] - Quận 12, TP. Hồ Chí Minh',
+        phone: '0392755766',
+        facebookUrl: '[ĐƯỜNG DẪN FACEBOOK CỦA QUÁN]',
+        openingHours: '06:00 - 21:00'
+      },
+      bathanh: {
+        brandKey: 'bathanh',
+        shortName: 'Quán Ăn 396 - Bò Né Bá Thành',
+        fullName: 'Quán Ăn 396 - Bò Né 3 Ngon & Bò Bít Tết Bá Thành',
+        tagline: 'Bò Né Chảo Gang 3 Ngon - Bít Tết & Bò Tươi Quận 12',
+        address: '396 Nguyễn Thị Kiểu, Phường Hiệp Thành, Quận 12, TP. Hồ Chí Minh',
+        phone: '0392755766',
+        facebookUrl: '[ĐƯỜNG DẪN FACEBOOK CỦA QUÁN]',
+        openingHours: '06:00 - 21:00'
+      }
+    };
+
+    let BRAND_CONFIG = { ...BRAND_PRESETS.bachxanh };
+
+    /**
+     * 2. DANH SÁCH THỰC ĐƠN 3 NHÓM CHUẨN CHIẾN LƯỢC (TẠI CHỖ - BÒ TƯƠI BÁN LẺ - UPSELL LÃI CAO)
+     */
+    const MENU_ITEMS = [
+      // Nhóm 1: Suất ăn nóng hổi tại chỗ
+      {
+        id: 'bo-ne-tieu-chuan',
+        name: 'Bò Né Tiêu Chuẩn (120g Bò Tươi)',
+        category: 'dinein',
+        catLabel: 'Suất ăn nóng hổi',
+        price: 50000,
+        badge: 'Chuẩn mốc 50k',
+        desc: '120g thịt bò tươi mềm định lượng chuẩn, 1 trứng ốp la, sốt tiêu đen/sốt bơ, salad trộn và 1 ổ bánh mì nóng giòn.',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'bo-ne-3-ngon',
+        name: 'Bò Né Đặc Biệt 3 Ngon',
+        category: 'dinein',
+        catLabel: 'Suất ăn nóng hổi',
+        price: 65000,
+        badge: 'Bán chạy số 1',
+        desc: 'Thịt bò tươi thăn nội, pate gan nhà làm béo ngậy, phô mai, trứng gà lòng đào, xúc xích và bánh mì đặc ruột.',
+        image: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'bo-bit-tet-tieu-den',
+        name: 'Bò Bít Tết Sốt Tiêu Đen Đậm Đà',
+        category: 'dinein',
+        catLabel: 'Suất ăn nóng hổi',
+        price: 60000,
+        badge: 'Lên món 90s',
+        desc: 'Thăn bò áp chảo gang lửa lớn giữ trọn độ ngọt mềm, khoai tây chiên vàng giòn, sốt tiêu đen hầm xương và bánh mì.',
+        image: 'https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'banh-mi-chao-bo',
+        name: 'Bánh Mì Chảo Bò Trứng Pate',
+        category: 'dinein',
+        catLabel: 'Suất ăn nóng hổi',
+        price: 45000,
+        badge: 'Bữa sáng nhanh',
+        desc: 'Chảo bò sốt cà chua/tiêu đen, pate gan, trứng lòng đào và xíu mại nóng hổi, phù hợp ăn sáng nhanh gọn.',
+        image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80'
+      },
+
+      // Nhóm 2: Bò tươi ướp sẵn bán lẻ mang về
+      {
+        id: 'khay-bo-300g',
+        name: 'Khay Bò Tươi Ướp Sẵn 300g + Sốt',
+        category: 'freshbeef',
+        catLabel: 'Bò tươi ướp sẵn',
+        price: 85000,
+        badge: 'Tiện lợi 2-3 người',
+        desc: '300g thịt bò tươi cắt lát chuẩn, tặng kèm túi sốt tiêu đen và bơ thơm. Về nhà chỉ cần áp chảo 2 phút là dùng ngay.',
+        image: 'https://images.unsplash.com/photo-1603048297172-c92544798d5a?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'khay-bo-500g',
+        name: 'Khay Bò Tươi 500g Kèm Sốt Tiêu Đen',
+        category: 'freshbeef',
+        catLabel: 'Bò tươi ướp sẵn',
+        price: 135000,
+        badge: 'Khách mua nhiều',
+        desc: '500g thịt bò tươi chọn lọc mỗi sáng, đóng khay sạch sẽ kèm gói sốt độc quyền của quán. Phù hợp bữa tối gia đình 4 người.',
+        image: 'https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'combo-bo-1kg',
+        name: 'Combo Gia Đình 1kg Bò Tươi + Bơ & Sốt',
+        category: 'freshbeef',
+        catLabel: 'Bò tươi ướp sẵn',
+        price: 260000,
+        badge: 'Tiết kiệm 20k',
+        desc: 'Trọn bộ 1kg bò tươi ướp sẵn chia 2 khay 500g, tặng kèm đầy đủ bơ thực vật, hộp sốt tiêu đen lớn cho tiệc cuối tuần.',
+        image: 'https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=600&q=80'
+      },
+
+      // Nhóm 3: Món thêm & Đồ uống lãi cao (Upsell)
+      {
+        id: 'up-trung',
+        name: 'Trứng Gà Lòng Đào / Ốp La Thêm',
+        category: 'upsell',
+        catLabel: 'Món gọi thêm',
+        price: 10000,
+        badge: 'Món thêm lãi cao',
+        desc: 'Trứng gà tươi mới mỗi ngày, chiên lòng đào béo ngậy chấm cùng bánh mì và sốt bò.',
+        image: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'up-pate',
+        name: 'Pate Gan Nhà Làm Thơm Béo (Phần Thêm)',
+        category: 'upsell',
+        catLabel: 'Món gọi thêm',
+        price: 15000,
+        badge: 'Đặc sản quán',
+        desc: 'Pate gan heo/ức vịt xay nhuyễn hấp cách thủy theo công thức riêng, nướng xèo xèo trên chảo gang.',
+        image: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'up-phomai',
+        name: 'Phô Mai Con Bò Cười / Phô Mai Tan Chảy',
+        category: 'upsell',
+        catLabel: 'Món gọi thêm',
+        price: 10000,
+        badge: 'Trẻ em mê tít',
+        desc: 'Viên phô mai béo ngậy hòa quyện cùng sốt bò tiêu đen nóng hổi.',
+        image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'up-banhmi',
+        name: 'Bánh Mì Nóng Giòn Đặc Ruột (Ổ Thêm)',
+        category: 'upsell',
+        catLabel: 'Món gọi thêm',
+        price: 5000,
+        badge: 'Nướng nóng',
+        desc: 'Bánh mì nướng giòn rụm ngay trước khi lên bàn để chấm sạch nước sốt bò.',
+        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80'
+      },
+      {
+        id: 'up-nuocsam',
+        name: 'Nước Sâm Nhà Nấu / Trà Tắc Mát Lạnh',
+        category: 'upsell',
+        catLabel: 'Đồ uống giải nhiệt',
+        price: 12000,
+        badge: 'Giải ngấy cực đã',
+        desc: 'Ly lớn mát lạnh giúp cân bằng vị giác sau khi thưởng thức chảo bò nóng hổi.',
+        image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80'
+      }
+    ];
+
+    // State
+    let currentFilter = 'all';
+    let cart = [];
+
+    // Format Vietnamese Currency
+    function formatVND(amount) {
+      return Number(amount).toLocaleString('vi-VN') + ' đồng';
+    }
+    function formatShortVND(amount) {
+      return Number(amount).toLocaleString('vi-VN') + 'đ';
+    }
+
+    // Show Custom Toast Notification
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      const bgClass = type === 'success' ? 'bg-charcoal border-gold text-cream' : 'bg-burgundy border-gold text-white';
+      toast.className = `pointer-events-auto p-4 rounded-2xl border-2 ${bgClass} shadow-2xl flex items-start gap-3 transition-all duration-300`;
+      toast.innerHTML = `
+        <i class="fa-solid ${type === 'success' ? 'fa-circle-check text-gold' : 'fa-circle-info text-gold'} text-lg mt-0.5"></i>
+        <div class="text-xs sm:text-sm font-semibold leading-snug flex-1">${message}</div>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(20px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 4200);
+    }
+
+    // Copy text helper using execCommand for iframe compatibility
+    function copyTextToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.warn('Copy fallback error:', err);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    /**
+     * 3. ĐỒNG BỘ THƯƠNG HIỆU LÊN GIAO DIỆN
+     */
+    function applyBrandConfigToDOM() {
+      document.getElementById('navBrandName').textContent = BRAND_CONFIG.shortName;
+      document.getElementById('navBrandTagline').textContent = BRAND_CONFIG.tagline;
+      document.getElementById('heroBrandInline').textContent = BRAND_CONFIG.fullName;
+      document.getElementById('heroAddressText').textContent = BRAND_CONFIG.address;
+      document.getElementById('footerBrandName').textContent = BRAND_CONFIG.fullName;
+      document.getElementById('footerAddressText').textContent = BRAND_CONFIG.address;
+      document.getElementById('copyrightBrand').textContent = BRAND_CONFIG.fullName;
+      document.getElementById('topBarPhoneDisplay').textContent = BRAND_CONFIG.phone;
+      document.getElementById('navPhoneText').textContent = BRAND_CONFIG.phone;
+      document.getElementById('footerFbText').textContent = BRAND_CONFIG.facebookUrl;
+
+      // Sync all phone text elements & links
+      document.querySelectorAll('.phone-sync-text').forEach(el => {
+        el.textContent = BRAND_CONFIG.phone;
+      });
+
+      const cleanPhone = BRAND_CONFIG.phone.replace(/[^0-9]/g, '') || '0392755766';
+      const telHref = `tel:${cleanPhone}`;
+      const zaloHref = `https://zalo.me/${cleanPhone}`;
+
+      ['navCallBtn', 'mobileCallLink', 'footerCallBtn', 'floatingCallBtn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.href = telHref;
+      });
+
+      ['footerZaloLink', 'footerZaloBtn', 'floatingZaloBtn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.href = zaloHref;
+      });
+
+      // Highlight active preset button
+      const btnBX = document.getElementById('btnBrandBachXanh');
+      const btnBT = document.getElementById('btnBrandBaThanh');
+      if (BRAND_CONFIG.brandKey === 'bachxanh') {
+        btnBX.className = 'px-2.5 py-1 rounded-md text-xs font-semibold transition-all bg-burgundy text-white shadow';
+        btnBT.className = 'px-2.5 py-1 rounded-md text-xs font-semibold transition-all text-cream/80 hover:text-white';
+      } else {
+        btnBT.className = 'px-2.5 py-1 rounded-md text-xs font-semibold transition-all bg-burgundy text-white shadow';
+        btnBX.className = 'px-2.5 py-1 rounded-md text-xs font-semibold transition-all text-cream/80 hover:text-white';
+      }
+    }
+
+    function switchBrandPreset(key) {
+      if (BRAND_PRESETS[key]) {
+        BRAND_CONFIG = { ...BRAND_PRESETS[key] };
+        applyBrandConfigToDOM();
+        populateConfigInputs();
+        showToast(`Đã chuyển cấu hình sang: <strong>${BRAND_CONFIG.fullName}</strong>`);
+      }
+    }
+
+    function populateConfigInputs() {
+      document.getElementById('cfgBrandName').value = BRAND_CONFIG.fullName;
+      document.getElementById('cfgPhone').value = BRAND_CONFIG.phone;
+      document.getElementById('cfgAddress').value = BRAND_CONFIG.address;
+      document.getElementById('cfgFacebook').value = BRAND_CONFIG.facebookUrl;
+    }
+
+    function toggleQuickConfigModal() {
+      const modal = document.getElementById('quickConfigModal');
+      if (modal.classList.contains('hidden')) {
+        populateConfigInputs();
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function saveCustomBrandConfig() {
+      const newName = document.getElementById('cfgBrandName').value.trim();
+      const newPhone = document.getElementById('cfgPhone').value.trim();
+      const newAddr = document.getElementById('cfgAddress').value.trim();
+      const newFb = document.getElementById('cfgFacebook').value.trim();
+
+      if (newName) {
+        BRAND_CONFIG.fullName = newName;
+        BRAND_CONFIG.shortName = newName.split('-')[0].trim();
+      }
+      if (newPhone) BRAND_CONFIG.phone = newPhone;
+      if (newAddr) BRAND_CONFIG.address = newAddr;
+      if (newFb) BRAND_CONFIG.facebookUrl = newFb;
+
+      applyBrandConfigToDOM();
+      toggleQuickConfigModal();
+      showToast('Đã cập nhật Số điện thoại, Zalo & Địa chỉ mới lên toàn bộ Website!');
+    }
+
+    function showFacebookPlaceholderNotice(e) {
+      if (BRAND_CONFIG.facebookUrl.includes('[')) {
+        e.preventDefault();
+        toggleQuickConfigModal();
+        showToast('Ông chủ hãy dán đường dẫn Fanpage Facebook thật của quán vào ô cấu hình nhé!');
+      }
+    }
+
+    /**
+     * 4. HIỂN THỊ THỰC ĐƠN & GIỎ HÀNG LOCALSTORAGE
+     */
+    function loadCartFromStorage() {
+      try {
+        const saved = localStorage.getItem('bachxanh_bathanh_cart_v1');
+        if (saved) {
+          cart = JSON.parse(saved);
+        } else {
+          // Mặc định có sẵn 1 suất Bò Né & 1 Trứng lòng đào để ông chủ thấy ngay giỏ hàng hoạt động
+          cart = [
+            { id: 'bo-ne-tieu-chuan', qty: 2 },
+            { id: 'up-trung', qty: 2 }
+          ];
+        }
+      } catch (e) {
+        cart = [];
+      }
+    }
+
+    function saveCartToStorage() {
+      try {
+        localStorage.setItem('bachxanh_bathanh_cart_v1', JSON.stringify(cart));
+      } catch (e) {}
+    }
+
+    function renderMenuGrid() {
+      const container = document.getElementById('menuGridContainer');
+      const filtered = currentFilter === 'all'
+        ? MENU_ITEMS
+        : MENU_ITEMS.filter(item => item.category === currentFilter);
+
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-white rounded-3xl border border-charcoal/10 shadow-sm hover:shadow-warm transition overflow-hidden flex flex-col justify-between group">
+          <div>
+            <div class="relative h-44 overflow-hidden bg-charcoal">
+              <img
+                src="${item.image}"
+                onerror="this.src='https://placehold.co/600x400/8B1E1E/FFFDF9?text=${encodeURIComponent(item.name)}'"
+                alt="${item.name}"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-charcoal/85 text-gold text-[11px] font-bold border border-gold/40">
+                ${item.badge}
+              </span>
+              <span class="absolute bottom-2 right-2 px-2.5 py-1 rounded-lg bg-burgundy text-white text-xs font-bold">
+                ${item.catLabel}
+              </span>
+            </div>
+            <div class="p-4 sm:p-5">
+              <h3 class="font-extrabold text-base sm:text-lg text-charcoal leading-snug">${item.name}</h3>
+              <p class="text-xs text-charcoal-muted mt-1.5 leading-relaxed">${item.desc}</p>
+            </div>
+          </div>
+
+          <div class="px-4 sm:px-5 pb-4 sm:pb-5 pt-2 flex items-center justify-between border-t border-charcoal/5">
+            <div>
+              <span class="text-[11px] text-charcoal-muted block">Giá tại quán:</span>
+              <span class="text-lg font-extrabold text-burgundy">${formatShortVND(item.price)}</span>
+            </div>
+            <button
+              onclick="addToCart('${item.id}')"
+              class="px-4 py-2.5 rounded-xl burgundy-btn font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm active:scale-95 transition"
+            >
+              <i class="fa-solid fa-plus text-gold"></i> Thêm vào giỏ
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterMenu(category) {
+      currentFilter = category;
+      document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-cat') === category) {
+          btn.className = 'menu-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm burgundy-btn shadow-sm transition';
+        } else {
+          btn.className = 'menu-tab-btn px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-cream-warm text-charcoal hover:bg-gold/20 border border-charcoal/10 transition';
+        }
+      });
+      renderMenuGrid();
+    }
+
+    function addToCart(itemId) {
+      const item = MENU_ITEMS.find(m => m.id === itemId);
+      if (!item) return;
+      const existing = cart.find(c => c.id === itemId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: itemId, qty: 1 });
+      }
+      saveCartToStorage();
+      renderCartUI();
+      showToast(`Đã thêm <strong>${item.name}</strong> vào giỏ hàng!`);
+    }
+
+    function quickAddUpsellCombo() {
+      ['up-trung', 'up-pate', 'up-nuocsam'].forEach(id => {
+        const existing = cart.find(c => c.id === id);
+        if (existing) existing.qty += 1;
+        else cart.push({ id, qty: 1 });
+      });
+      saveCartToStorage();
+      renderCartUI();
+      showToast('Đã thêm Combo Món Phụ Lãi Cao (Trứng lòng đào + Pate + Nước sâm) vào giỏ!');
+    }
+
+    function changeCartQty(itemId, delta) {
+      const idx = cart.findIndex(c => c.id === itemId);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) {
+        cart.splice(idx, 1);
+      }
+      saveCartToStorage();
+      renderCartUI();
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCartToStorage();
+      renderCartUI();
+      showToast('Đã làm trống giỏ hàng.');
+    }
+
+    function renderCartUI() {
+      const inlineContainer = document.getElementById('inlineCartItems');
+      const drawerContainer = document.getElementById('drawerCartItems');
+
+      let totalQty = 0;
+      let totalPrice = 0;
+
+      if (cart.length === 0) {
+        const emptyHtml = `
+          <div class="text-center py-8 px-4 rounded-2xl bg-cream-warm border border-dashed border-charcoal/20">
+            <i class="fa-solid fa-basket-shopping text-2xl text-charcoal-muted mb-2"></i>
+            <p class="text-xs font-bold text-charcoal">Giỏ hàng đang trống</p>
+            <p class="text-[11px] text-charcoal-muted mt-0.5">Hãy bấm "+ Thêm vào giỏ" ở danh sách món bên cạnh.</p>
+          </div>
+        `;
+        inlineContainer.innerHTML = emptyHtml;
+        drawerContainer.innerHTML = emptyHtml;
+      } else {
+        const itemsHtml = cart.map(c => {
+          const product = MENU_ITEMS.find(m => m.id === c.id);
+          if (!product) return '';
+          const sub = product.price * c.qty;
+          totalQty += c.qty;
+          totalPrice += sub;
+          return `
+            <div class="p-3 rounded-2xl bg-cream-warm border border-charcoal/10 flex items-center justify-between gap-2">
+              <div class="min-w-0 flex-1">
+                <div class="text-xs font-extrabold text-charcoal truncate">${product.name}</div>
+                <div class="text-xs font-bold text-burgundy mt-0.5">${formatShortVND(product.price)} x ${c.qty} = ${formatShortVND(sub)}</div>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button onclick="changeCartQty('${product.id}', -1)" class="w-7 h-7 rounded-lg bg-white border border-charcoal/20 font-extrabold text-xs hover:bg-burgundy hover:text-white transition">-</button>
+                <span class="w-6 text-center text-xs font-extrabold">${c.qty}</span>
+                <button onclick="changeCartQty('${product.id}', 1)" class="w-7 h-7 rounded-lg bg-white border border-charcoal/20 font-extrabold text-xs hover:bg-burgundy hover:text-white transition">+</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        inlineContainer.innerHTML = itemsHtml;
+        drawerContainer.innerHTML = itemsHtml;
+      }
+
+      document.getElementById('headerCartCount').textContent = totalQty;
+      document.getElementById('floatingCartCount').textContent = totalQty;
+      document.getElementById('cartTotalQty').textContent = `${totalQty} món`;
+      document.getElementById('cartTotalPrice').textContent = formatVND(totalPrice);
+      document.getElementById('drawerCartTotal').textContent = formatVND(totalPrice);
+    }
+
+    function toggleCartDrawer(show) {
+      const modal = document.getElementById('cartDrawerModal');
+      if (show) modal.classList.remove('hidden');
+      else modal.classList.add('hidden');
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    /**
+     * 5. GỬI ĐƠN HÀNG & ĐẶT BÀN QUA ZALO CHỦ QUÁN
+     */
+    function checkoutViaZalo() {
+      if (cart.length === 0) {
+        showToast('Giỏ hàng đang trống! Quý khách vui lòng chọn ít nhất 1 món trước khi gửi đơn.', 'error');
+        return;
+      }
+
+      const serviceType = document.getElementById('orderServiceType').value;
+      const name = document.getElementById('custName').value.trim() || 'Khách hàng Quận 12';
+      const phone = document.getElementById('custPhone').value.trim() || 'Chưa nhập SĐT';
+      const address = document.getElementById('custAddress').value.trim() || 'Tại Quận 12';
+      const note = document.getElementById('custNote').value.trim() || 'Không có ghi chú thêm';
+
+      let total = 0;
+      const lines = cart.map((c, index) => {
+        const p = MENU_ITEMS.find(m => m.id === c.id);
+        const sub = p.price * c.qty;
+        total += sub;
+        return `${index + 1}. ${p.name} (SL: ${c.qty}) = ${formatShortVND(sub)}`;
+      });
+
+      const orderMessage = [
+        `🔥 ĐƠN ĐẶT MÓN MỚI - ${BRAND_CONFIG.shortName.toUpperCase()}`,
+        `--------------------------------`,
+        `👤 Khách hàng: ${name}`,
+        `📞 SĐT: ${phone}`,
+        `🛵 Hình thức: ${serviceType}`,
+        `📍 Địa chỉ/Bàn: ${address}`,
+        `--------------------------------`,
+        `📋 CHI TIẾT MÓN ĐẶT:`,
+        ...lines,
+        `--------------------------------`,
+        `💰 TỔNG CỘNG: ${formatVND(total)}`,
+        `📝 Ghi chú: ${note}`
+      ].join('\n');
+
+      copyTextToClipboard(orderMessage);
+      const cleanPhone = BRAND_CONFIG.phone.replace(/[^0-9]/g, '') || '0392755766';
+      showToast('Đã sao chép nội dung đơn hàng! Đang mở Zalo chủ quán để quý khách dán và gửi...');
+
+      setTimeout(() => {
+        window.open(`https://zalo.me/${cleanPhone}`, '_blank');
+      }, 900);
+    }
+
+    function submitTableBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('bookName').value.trim();
+      const phone = document.getElementById('bookPhone').value.trim();
+      const date = document.getElementById('bookDate').value;
+      const slot = document.getElementById('bookTimeSlot').value;
+      const guests = document.getElementById('bookGuests').value;
+      const preorder = document.getElementById('bookPreorder').value.trim() || 'Chọn món tại bàn';
+
+      const bookingMsg = [
+        `📅 PHIẾU ĐẶT BÀN GIỮ CHỖ - ${BRAND_CONFIG.shortName.toUpperCase()}`,
+        `--------------------------------`,
+        `👤 Tên khách: ${name}`,
+        `📞 SĐT: ${phone}`,
+        `📆 Ngày đến: ${date}`,
+        `⏰ Khung giờ: ${slot}`,
+        `👥 Số lượng: ${guests}`,
+        `🍽️ Món dặn trước: ${preorder}`,
+        `🎁 Ưu đãi: Tặng 01 Trứng ốp la / Trà tắc khách đặt trước qua Web`
+      ].join('\n');
+
+      copyTextToClipboard(bookingMsg);
+      const cleanPhone = BRAND_CONFIG.phone.replace(/[^0-9]/g, '') || '0392755766';
+      showToast('Đã sao chép thông tin Đặt Bàn! Đang chuyển sang Zalo chủ quán...');
+
+      setTimeout(() => {
+        window.open(`https://zalo.me/${cleanPhone}`, '_blank');
+      }, 900);
+    }
+
+    /**
+     * 6. BẢNG TÍNH HIỆU QUẢ KINH DOANH & NHÂN SỰ (100 - 200 - 1.000 SUẤT/NGÀY)
+     */
+    function setCalculatorMilestone(portions) {
+      document.getElementById('calcPortionsSlider').value = portions;
+      updateBusinessCalculator();
+    }
+
+    function updateBusinessCalculator() {
+      const portions = Number(document.getElementById('calcPortionsSlider').value) || 200;
+      const unitPrice = Number(document.getElementById('calcUnitPrice').value) || 50000;
+      const cogsPercent = Number(document.getElementById('calcCogsPercent').value) || 45;
+
+      // Update badge
+      document.getElementById('calcPortionsBadge').textContent = `${portions.toLocaleString('vi-VN')} suất/ngày`;
+
+      // Revenue calculations
+      const revDay = portions * unitPrice;
+      const revWeek = revDay * 7;
+      const revMonth = revDay * 30;
+
+      // COGS calculations
+      const cogsPerUnit = Math.round(unitPrice * (cogsPercent / 100));
+      const cogsMonth = revMonth * (cogsPercent / 100);
+
+      // Operating & Staffing Cost Percentage based on exact prompt benchmarks:
+      // At 100 portions: RevMonth = 150M, COGS = 67.5M (45%), OpEx = 45M (30%), NetProfit = 37.5M (25%)
+      // At 200 portions: RevMonth = 300M, COGS = 135M (45%), OpEx = 75M (25%), NetProfit = 90M (30%)
+      // At 1000 portions: RevMonth = 1,500M, COGS = 675M (45%), OpEx = 300M (20%), NetProfit = 525M (35%)
+      let opexRatio = 0.25;
+      if (portions <= 100) {
+        opexRatio = 0.30;
+      } else if (portions < 200) {
+        opexRatio = 0.30 - ((portions - 100) / 100) * 0.05;
+      } else if (portions === 200) {
+        opexRatio = 0.25;
+      } else if (portions < 1000) {
+        opexRatio = 0.25 - ((portions - 200) / 800) * 0.05;
+      } else {
+        opexRatio = 0.20;
+      }
+
+      const opexMonth = Math.round(revMonth * opexRatio);
+      const netProfitMonth = Math.round(revMonth - cogsMonth - opexMonth);
+      const netProfitDay = Math.round(netProfitMonth / 30);
+
+      // Render Financial Outputs
+      document.getElementById('resRevDay').textContent = formatShortVND(revDay);
+      document.getElementById('resRevWeek').textContent = formatShortVND(revWeek);
+      document.getElementById('resRevMonth').textContent = formatShortVND(revMonth);
+      document.getElementById('resCogsMonth').textContent = formatShortVND(cogsMonth);
+      document.getElementById('resCogsPerUnit').textContent = `Giá vốn: ${formatShortVND(cogsPerUnit)}/suất`;
+      document.getElementById('resOpexMonth').textContent = formatShortVND(opexMonth);
+      document.getElementById('resOpexRatio').textContent = `Chiếm ${(opexRatio * 100).toFixed(1)}% doanh thu`;
+      document.getElementById('resNetProfitMonth').textContent = formatShortVND(netProfitMonth);
+      document.getElementById('resNetProfitDay').textContent = `Lãi ròng: ${formatShortVND(netProfitDay)}/ngày`;
+
+      // Dynamic Staffing & Operational Recommendations
+      const staffTitle = document.getElementById('calcStaffTitle');
+      const staffDetail = document.getElementById('calcStaffDetail');
+      const kitchenTitle = document.getElementById('calcKitchenTitle');
+      const kitchenDetail = document.getElementById('calcKitchenDetail');
+      const channelTitle = document.getElementById('calcChannelTitle');
+      const channelDetail = document.getElementById('calcChannelDetail');
+
+      if (portions <= 130) {
+        staffTitle.textContent = 'Định biên: 3 Nhân sự gọn nhẹ';
+        staffDetail.textContent = 'Gồm: 1 Bếp chính đứng chảo, 1 Phụ bếp kiêm rửa chén và 1 Nhân viên chạy bàn kiêm thu ngân.';
+        kitchenTitle.textContent = '10 - 12 Bàn & 5 Họng Bếp Khò';
+        kitchenDetail.textContent = 'Chuẩn bị sẵn 100 khay bò 120g từ sáng sớm. Phù hợp giai đoạn khởi động chuẩn hóa.';
+        channelTitle.textContent = `Lãi ròng ${formatShortVND(netProfitDay)}/ngày`;
+        channelDetail.textContent = 'Tập trung 80% khách ăn tại chỗ giờ sáng và 20% khách mua mang về.';
+      } else if (portions <= 260) {
+        staffTitle.textContent = 'Định biên: 5 - 6 Nhân sự chuyên trách';
+        staffDetail.textContent = 'Gồm: 1 Bếp chính, 1 Phụ bếp lên khay & nướng bánh mì, 2 Phục vụ chia dãy bàn, 1 Thu ngân điều phối đơn mang về và 1 Tạp vụ.';
+        kitchenTitle.textContent = '15 - 20 Bàn & 8 Họng Bếp Khò';
+        kitchenDetail.textContent = 'Bếp 1 chiều cân sẵn 200 khay thịt 120g, nồi ủ sốt luôn sôi để ra món trong 90 giây.';
+        channelTitle.textContent = `Chuẩn lãi ${formatShortVND(netProfitDay)}/ngày`;
+        channelDetail.textContent = 'Nếu đang bán 200 suất mà lãi thấp hơn mức này tức là quán đang bị thất thoát định lượng nguyên liệu (>50%).';
+      } else if (portions <= 600) {
+        staffTitle.textContent = 'Định biên: 8 - 10 Nhân sự (Tăng trưởng)';
+        staffDetail.textContent = 'Chia ca hợp lý: 2 Bếp đứng chảo, 2 Phụ bếp sơ chế & đóng khay bò lẻ, 3 Phục vụ bàn, 1 Thu ngân trực Zalo/Web và 1-2 Tạp vụ.';
+        kitchenTitle.textContent = '20 Bàn Xoay Vòng Nhanh & 10 Họng Bếp';
+        kitchenDetail.textContent = 'Áp dụng triệt để đặt bàn trước và quét QR tại bàn để tăng vòng quay bàn giờ cao điểm.';
+        channelTitle.textContent = 'Mở Rộng Bán Mang Về & Bò Ướp Sẵn';
+        channelDetail.textContent = 'Kết hợp 220 suất ăn tại chỗ + 80-150 đơn giao hàng & khay bò tươi ướp sẵn qua Zalo.';
+      } else {
+        staffTitle.textContent = 'Định biên: 18 - 20 Nhân sự (Chia 2 Ca Sáng/Tối)';
+        staffDetail.textContent = 'Gồm đội bếp chuyên nghiệp 2 ca, đội phục vụ tại quán và đội đóng gói khay bò tươi + điều phối giao hàng riêng.';
+        kitchenTitle.textContent = 'Hệ Thống Bếp Công Nghiệp 10-12 Họng Khò';
+        kitchenDetail.textContent = 'Dây chuyền đóng khay bò tươi ướp sẵn hút chân không/màng bọc chuẩn vệ sinh cung cấp cả ngày.';
+        channelTitle.textContent = 'Chia 3 Nguồn Thu Chiến Lược (1.000 Suất)';
+        channelDetail.textContent = '400 suất ăn tại quán cả ngày + 300 suất giao hàng quanh Quận 12 + 300 phần bò tươi ướp sẵn bán qua Website/Zalo.';
+      }
+    }
+
+    function copyRisenPrompt() {
+      const text = document.getElementById('risenPromptContent').innerText;
+      copyTextToClipboard(text);
+      showToast('Đã sao chép toàn bộ Siêu Câu Lệnh RISEN vào bộ nhớ tạm!');
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set default booking date to today
+      const todayStr = new Date().toISOString().split('T')[0];
+      const bookDateEl = document.getElementById('bookDate');
+      if (bookDateEl) bookDateEl.value = todayStr;
+
+      applyBrandConfigToDOM();
+      loadCartFromStorage();
+      renderMenuGrid();
+      renderCartUI();
+      updateBusinessCalculator();
+    });
+  </script>
+</body>
+</html>
